@@ -10,10 +10,12 @@
     "lint": "eslint ."
   },
   "dependencies": {
+    "ajv": "^6.10.2",
     "axios": "^0.19.0",
     "immutable": "^4.0.0-rc.12",
     "react": "16.9.0",
     "react-native": "0.61.5",
+    "react-native-device-info": "^5.4.0",
     "react-native-gesture-handler": "^1.5.2",
     "react-native-i18n": "^2.0.15",
     "react-native-logs": "^1.0.2",

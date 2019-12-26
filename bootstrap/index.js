@@ -8,3 +8,5 @@ global._t = i18n.t;
 global.logger = logger;
 // 定义全局的样式
 global.theme = theme;
+// 后台服务器地址
+global.SERVER_IP = '192.168.116.126:8888';

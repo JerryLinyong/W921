@@ -1,4 +1,4 @@
-import {all, fork, delay} from 'redux-saga/effects';
+import {all, fork} from 'redux-saga/effects';
 import areasWorkflow from './areas';
 
 export default function* sagas() {

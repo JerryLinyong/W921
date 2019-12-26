@@ -12,6 +12,14 @@
 
 ### 路由
 
+```javascript
+1. 路由分为两部分: main和entry
+- main: app的主界面,存在5个页面 home,message,statistics,map,settings
+- entry: app可以跳转的所有页面
+2. 所有页面支持根据主题变化颜色
+3. 所有页面可以根据根的字体大小,同步调整所有页面字体大小
+```
+
 1. react-navigation(可扩展且使用简单的导航解决方案)
 
 - https://www.npmjs.com/package/react-navigation
@@ -23,6 +31,12 @@
 - https://rn.mobile.ant.design/
 
 ### 仓库
+
+```javascript
+1. 所有对仓库的修改都是发送 ****_SUCCESS 事件
+2. 如果要发送http请求就要发送 **** 事件,根据结果发送 ****_FAIL 或 ****_SUCCESS 事件
+3. saga文件处理所有的异步请求
+```
 
 1. redux(管理数据状态)
 
@@ -49,6 +63,11 @@
 - https://www.npmjs.com/package/react-native-storage
 
 ### 数据对接
+
+```javascript
+1. 封装axios,对每一个http请求做处理
+
+```
 
 1. axios(发送 http 请求)
 
