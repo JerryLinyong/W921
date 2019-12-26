@@ -19,43 +19,43 @@ export default class MainTabNavigator extends React.Component {
             navigationOptions: {
               tabBarLabel: '主页',
               tabBarIcon: ({tintColor}) => (
-                <Icon name="account-check" color={tintColor} size={24} />
-              ),
-            },
-          },
-          Map: {
-            screen: Map,
-            navigationOptions: {
-              tabBarLabel: '主页',
-              tabBarIcon: ({tintColor}) => (
-                <Icon name="account-check" color={tintColor} size={24} />
+                <Icon name="home" color={tintColor} size={24} />
               ),
             },
           },
           Message: {
             screen: Message,
             navigationOptions: {
-              tabBarLabel: '主页',
+              tabBarLabel: '消息',
               tabBarIcon: ({tintColor}) => (
-                <Icon name="account-check" color={tintColor} size={24} />
-              ),
-            },
-          },
-          Settings: {
-            screen: Settings,
-            navigationOptions: {
-              tabBarLabel: '主页',
-              tabBarIcon: ({tintColor}) => (
-                <Icon name="account-check" color={tintColor} size={24} />
+                <Icon name="email" color={tintColor} size={24} />
               ),
             },
           },
           Statistics: {
             screen: Statistics,
             navigationOptions: {
-              tabBarLabel: '主页',
+              tabBarLabel: '统计',
               tabBarIcon: ({tintColor}) => (
-                <Icon name="account-check" color={tintColor} size={24} />
+                <Icon name="chart-pie" color={tintColor} size={24} />
+              ),
+            },
+          },
+          Map: {
+            screen: Map,
+            navigationOptions: {
+              tabBarLabel: '地图',
+              tabBarIcon: ({tintColor}) => (
+                <Icon name="map" color={tintColor} size={24} />
+              ),
+            },
+          },
+          Settings: {
+            screen: Settings,
+            navigationOptions: {
+              tabBarLabel: '设置',
+              tabBarIcon: ({tintColor}) => (
+                <Icon name="settings-outline" color={tintColor} size={24} />
               ),
             },
           },

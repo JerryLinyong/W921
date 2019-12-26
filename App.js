@@ -1,9 +1,15 @@
+import './bootstrap';
 import React from 'react';
 import Router from './router';
-import './bootstrap';
+import {Provider} from 'react-redux';
+import store from './store';
 
 export default class App extends React.Component {
   render() {
-    return <Router />;
+    return (
+      <Provider store={store}>
+        <Router />
+      </Provider>
+    );
   }
 }
