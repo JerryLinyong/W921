@@ -10,7 +10,7 @@ import Ajv from 'ajv';
 const ajv = new Ajv();
 const validateUrl = ajv.compile({format: 'url'});
 
-// 获取mac地址
+// 获取mac地址,需要权限
 let mac = '';
 function getMac() {
   getMacAddress()
@@ -63,7 +63,7 @@ const apiRequestInterceptor = [
     if (!mac) getMac();
     // 统一更改http请求的url
     // 添加mac地址
-    config.url = SERVER_IP + '/' + mac + config.url;
+    config.url = SERVER_ADDRESS + '/' + mac + config.url;
     // 验证URL
     if (validateUrl(config.url)) {
       logger.error('url格式错误:' + config.url);

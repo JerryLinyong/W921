@@ -26,13 +26,4 @@ const config = {
 // 创建打印实例
 let logger = rnLogger.createLogger(config);
 
-// 根据模式设置需要打印的等级
-if (__DEV__) {
-  // 开发模式,全部打印
-  logger.setSeverity('debug');
-} else {
-  // 发布模式,只打印错误
-  logger.setSeverity('error');
-}
-
 export default logger;

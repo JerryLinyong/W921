@@ -2,6 +2,7 @@ import React from 'react';
 import {createAppContainer} from 'react-navigation';
 import {createStackNavigator} from 'react-navigation-stack';
 import MainScreen from './main';
+import entry from './entry';
 
 export default class AppNavigator extends React.Component {
   render() {
@@ -9,6 +10,7 @@ export default class AppNavigator extends React.Component {
       createStackNavigator(
         {
           Main: MainScreen,
+          ...entry,
         },
         {
           initialRouteName: 'Main', // 起始页
