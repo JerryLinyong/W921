@@ -1,28 +1,14 @@
 /**
-http请求封装,做发送和返回值的拦截处理
+  http请求封装,做发送和返回值的拦截处理
 */
 
 import axios from 'axios';
-import {getMacAddress} from 'react-native-device-info';
+import store from '../store';
 import Ajv from 'ajv';
 
 // url 验证
 const ajv = new Ajv();
 const validateUrl = ajv.compile({format: 'url'});
-
-// 获取mac地址,需要权限
-let mac = '';
-function getMac() {
-  getMacAddress()
-    .then(macAdress => {
-      // "E5:12:D8:E5:69:97"
-      mac = macAdress.replace(/,/g, '');
-    })
-    .catch(e => {
-      logger.error('获取mac地址失败:' + e);
-    });
-}
-getMac();
 
 // 设置返回值状态
 const ApiResponseStatus = {
@@ -59,10 +45,8 @@ const httpApiRequest = axios.create({
 // 创建请求拦截器
 const apiRequestInterceptor = [
   config => {
-    // 如果mac地址不存在,则重新请求
-    if (!mac) getMac();
+    let mac = store.getState('my').mac;
     // 统一更改http请求的url
-    // 添加mac地址
     config.url = SERVER_ADDRESS + '/' + mac + config.url;
     // 验证URL
     if (validateUrl(config.url)) {
