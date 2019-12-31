@@ -23,15 +23,15 @@ let defaultArea = {
 
 export default handleActions(
   {
-    //加载所有分区
+    // 加载所有分区
     [actions.LOAD_AREAS_SUCCESS]: (state, action) => fromJS(action.payload),
-    //增加分区
+    // 增加分区
     [actions.ADD_AREA_SUCCESS]: (state, action) => {
       let newArea = action.payload;
       state.set(newArea.id, fromJS(newArea));
       return state;
     },
-    //更新分区
+    // 更新分区
     [actions.UPDATE_AREA_SUCCESS]: (state, action) => {
       let newProps = action.payload;
       let area = state.get(newProps.id);
@@ -44,7 +44,7 @@ export default handleActions(
       }
       return state;
     },
-    //移除分区 payload=id
+    // 移除分区 payload=id
     [actions.REMOVE_AREA_SUCCESS]: (state, action) => {
       state.delete(action.payload);
       return state;
