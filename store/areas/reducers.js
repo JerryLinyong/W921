@@ -23,6 +23,7 @@ let defaultArea = {
 
 export default handleActions(
   {
+    // ================== 成功 ========================================== //
     // 加载所有分区
     [actions.LOAD_AREAS_SUCCESS]: (state, action) => fromJS(action.payload),
     // 增加分区
@@ -47,6 +48,23 @@ export default handleActions(
     // 移除分区 payload=id
     [actions.REMOVE_AREA_SUCCESS]: (state, action) => {
       state.delete(action.payload);
+      return state;
+    },
+    // ================== 失败 ========================================== //
+    // 加载所有分区
+    [actions.LOAD_AREAS_FAIL]: (state, action) => {
+      return state;
+    },
+    // 增加分区
+    [actions.ADD_AREA_FAIL]: (state, action) => {
+      return state;
+    },
+    // 更新分区
+    [actions.UPDATE_AREA_FAIL]: (state, action) => {
+      return state;
+    },
+    // 移除分区 payload=id
+    [actions.REMOVE_AREA_FAIL]: (state, action) => {
       return state;
     },
   },
