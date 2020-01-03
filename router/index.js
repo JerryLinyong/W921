@@ -1,4 +1,4 @@
-// 定义app路由
+// 定义app所有的路由
 import React from 'react';
 import {createAppContainer} from 'react-navigation';
 import {createStackNavigator} from 'react-navigation-stack';

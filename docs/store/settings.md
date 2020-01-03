@@ -2,11 +2,6 @@
 
 ```javascript
 {
-  theme:{ // 主题
-    color:'red', // 字体颜色 string
-    fontSize:12, // 字体大小 number
-    background:'' // 背景 string
-  },
   network:{ // 网络
     cable:{ // 有线网络
       dhcp:false, // DHCP boolean

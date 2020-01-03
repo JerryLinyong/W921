@@ -29,26 +29,20 @@ export default handleActions(
     // 增加分区
     [actions.ADD_AREA_SUCCESS]: (state, action) => {
       let newArea = action.payload;
-      state.set(newArea.id, fromJS(newArea));
-      return state;
+      return state.set(newArea.id, fromJS(newArea));
     },
     // 更新分区
     [actions.UPDATE_AREA_SUCCESS]: (state, action) => {
       let newProps = action.payload;
-      let area = state.get(newProps.id);
-      for (let key in newProps) {
-        if (typeof newProps[key] === 'object') {
-          area.set(key, fromJS(newProps[key]));
-        } else {
-          area.set(key, newProps[key]);
+      return state.update(area => {
+        if (area.get(id) === newProps.id) {
+          return fromJS(Object.assign(area.toJS(), newProps));
         }
-      }
-      return state;
+      });
     },
     // 移除分区 payload=id
     [actions.REMOVE_AREA_SUCCESS]: (state, action) => {
-      state.delete(action.payload);
-      return state;
+      return state.delete(action.payload);
     },
     // ================== 失败 ========================================== //
     // 加载所有分区

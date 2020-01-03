@@ -14,14 +14,15 @@ export default handleActions(
     // 更新我的信息
     [actions.UPDATE_MY_SUCCESS]: (state, action) => {
       let newProps = action.payload;
+      let newState = state;
       for (let key in newProps) {
         if (typeof newProps[key] === 'object') {
-          state.set(key, fromJS(newProps[key]));
+          newState = state.set(key, fromJS(newProps[key]));
         } else {
-          state.set(key, newProps[key]);
+          newState = state.set(key, newProps[key]);
         }
       }
-      return state;
+      return newState;
     },
     // ================== 失败 ========================================== //
     [actions.UPDATE_MY_FAIL]: (state, action) => {

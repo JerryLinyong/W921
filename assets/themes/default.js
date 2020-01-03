@@ -8,5 +8,5 @@ export default {
   header: '#2a2a2a',
   headerBorder: '#3a3a3a',
   label: '#fff',
-  primary: 'red',
+  primary: 'blue',
 };

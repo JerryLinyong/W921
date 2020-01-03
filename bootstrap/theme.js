@@ -1,5 +1,6 @@
 import defaultTheme from '../assets/themes/default';
-let themes = {default: defaultTheme};
+import redTheme from '../assets/themes/red';
+let themes = {default: defaultTheme, red: redTheme};
 class ThemeProvider {
   constructor(props = {}) {}
   // 更新主题

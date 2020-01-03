@@ -15,38 +15,29 @@ export default handleActions(
   {
     // ================== 成功 ========================================== //
     // 加载所有页面
-    [actions.LOAD_PAGES_SUCCESS]: (state, action) => {
-      state = fromJS(
+    [actions.LOAD_PAGES_SUCCESS]: (state, action) =>
+      fromJS(
         Object.assign(action.payload, {
           loaded: {load: true},
           errors: {},
         }),
-      );
-      return state;
-    },
+      ),
     // 增加页面
     [actions.ADD_PAGE_SUCCESS]: (state, action) => {
-      let newPage = action.payload;
-      state.set(newPage.id, fromJS(newPage));
-      return state;
+      return state.set(newPage.id, fromJS(action.payload));
     },
     // 更新页面
     [actions.UPDATE_PAGE_SUCCESS]: (state, action) => {
       let newProps = action.payload;
-      let page = state.get(newProps.id);
-      for (let key in newProps) {
-        if (typeof newProps[key] === 'object') {
-          page.set(key, fromJS(newProps[key]));
-        } else {
-          page.set(key, newProps[key]);
+      return state.update(page => {
+        if (page.get(id) === newProps.id) {
+          return fromJS(Object.assign(page.toJS(), newProps));
         }
-      }
-      return state;
+      });
     },
     // 移除页面 payload=id
     [actions.REMOVE_PAGE_SUCCESS]: (state, action) => {
-      state.delete(action.payload);
-      return state;
+      return delete action.payload;
     },
     // ================== 失败 ========================================== //
     // 加载所有页面失败

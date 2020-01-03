@@ -1,3 +1,12 @@
+// 通用的路由头部组件
+// props
+//   title: '未定义', // 路由title
+//   backable: true, // 是否在左侧显示返回按钮,默认 = true,点击会返回上一页
+//   checkable: true, // 是否在右侧显示打勾按钮,默认 = true,点击会触发页面onHeaderClick,传递字符串check
+//   buttons: [], // 定义右侧按钮 {icon,name}
+// methods
+// events
+//   onHeaderClick // 当路由头部右侧图标按钮被点击,触发页面的onHeaderClick方法,并且传递点击图标的id
 import React from 'react';
 import {View, Text, StatusBar, StyleSheet} from 'react-native';
 import {connect} from 'react-redux';

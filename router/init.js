@@ -25,7 +25,7 @@ class initScreen extends React.Component {
     }
     // 加载页面成功,进行跳转
     if (isPageLoaded) {
-      nextProps.navigation.replace('Main');
+      nextProps.navigation.push('Main');
     }
     // 否则，对于state不进行任何操作,否则放回state要修改的值
     return null;
