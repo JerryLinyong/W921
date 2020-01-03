@@ -1,6 +1,6 @@
 import i18n from './language';
 import logger from './logger';
-import theme from './theme';
+import themeProvider from './theme';
 import {scaleSizeH, scaleSizeW, setSpText} from '../utils/screen';
 
 // 定义自适应屏幕的宽高函数
@@ -13,7 +13,7 @@ global._t = text => i18n.t(text);
 // 定义全局的打印
 global.logger = logger;
 // 定义全局的样式
-global.theme = theme;
+global.themeProvider = themeProvider;
 // 后台服务器地址
 global.SERVER_ADDRESS = 'http://192.168.116.126:8081';
 

@@ -1,3 +1,4 @@
+// app主页面,根据不同的用户生成
 import React from 'react';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {createAppContainer} from 'react-navigation';
@@ -7,12 +8,20 @@ import Map from '../modules/map';
 import Message from '../modules/message';
 import Settings from '../modules/settings';
 import Statistics from '../modules/statistics';
-import theme from '../bootstrap/theme';
+import {connect} from 'react-redux';
 
-export default class MainTabNavigator extends React.Component {
+class MainTabNavigator extends React.Component {
   render() {
+    // ====== 样式 ====== //
     // 选项卡是否可见
-    const tabBarStyle = {display: 'none'};
+    // const tabBarStyle = {display: 'none'};
+    const tabBarStyle = {};
+    // ====== 加载的页面 ====== //
+    // 根据不同的app加载不同的页面
+    if (this.props.app === 'hispro') {
+    } else if (this.props.app === '') {
+    }
+    // 创建tabs
     const MainTabNavigator = createAppContainer(
       // createMaterialTopTabNavigator提供更多的功能
       createMaterialTopTabNavigator(
@@ -72,9 +81,13 @@ export default class MainTabNavigator extends React.Component {
           animationEnabled: true, // 是否在切换tab页时使用动画
           style: {}, // 整体的样式,包含页面
           tabBarOptions: {
+            showIcon: true, // 是否展现icon
+            showLabel: false, // 是否展现label
             // 导航栏样式
             activeTintColor: 'blue', // 激活的标签和图标颜色
             activeBackgroundColor: 'white', // 激活的背景色
+            labelStyle: {}, // 选项卡标签的样式对象
+            iconStyle: {}, // 选项卡图标的样式对象
             style: tabBarStyle, // 整体的样式,包含页面
           },
         },
@@ -83,3 +96,17 @@ export default class MainTabNavigator extends React.Component {
     return <MainTabNavigator />;
   }
 }
+
+const mapStateToProps = (state, ownProps) => {
+  return {
+    pages: state.pages.get('pages'), // 加载的页面
+    theme: state.my.get('theme'), // 主题
+    app: state.my.get('app'), // app的类型
+  };
+};
+
+const mapDispatchToProps = (dispatch, ownProps) => {
+  return {};
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(MainTabNavigator);

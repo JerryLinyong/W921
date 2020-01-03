@@ -1,3 +1,4 @@
+// 用于加载用户数据,加载完毕后进入主页面
 import React from 'react';
 import {Text, View} from 'react-native';
 import {connect} from 'react-redux';
