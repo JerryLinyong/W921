@@ -5,16 +5,12 @@ import {connect} from 'react-redux';
 import {updateMySuccess} from '@store/my/actions';
 
 class HomeScreen extends React.Component {
-  componentDidMount() {
-    setTimeout(() => {
-      this.props.updateMy({theme: 'red'});
-    }, 5000);
-  }
+  componentDidMount() {}
   onHeaderClick(type) {}
   render() {
     return (
       <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-        <Text>{this.props.theme}</Text>
+        <Text>w921</Text>
         <Icon name="facebook" />
         <Icon.Button name="facebook" backgroundColor="#3b5998"></Icon.Button>
       </View>

@@ -3,8 +3,7 @@ import {handleActions} from 'redux-actions';
 import {Map, updateIn, update, remove, List, fromJS} from 'immutable';
 
 let initMy = fromJS({
-  mac: 'affhfaa1234', // 本机的mac地址
-  app: 'hispro', // 本机的app类型,根据类型呈现不同的页面
+  app: '', // 本机的app类型,根据类型呈现不同的页面,为空则要进行选择
   theme: 'default', // 主题
 });
 

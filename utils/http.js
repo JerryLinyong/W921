@@ -3,7 +3,6 @@
 */
 
 import axios from 'axios';
-import store from '../store';
 import Ajv from 'ajv';
 
 // url 验证
@@ -45,9 +44,8 @@ const httpApiRequest = axios.create({
 // 创建请求拦截器
 const apiRequestInterceptor = [
   config => {
-    let mac = store.getState('my').mac;
     // 统一更改http请求的url
-    config.url = SERVER_ADDRESS + '/' + mac + config.url;
+    config.url = SERVER_ADDRESS + config.url;
     // 验证URL
     if (validateUrl(config.url)) {
       logger.error('url格式错误:' + config.url);

@@ -1,12 +1,13 @@
 import i18n from './language';
 import logger from './logger';
 import themeProvider from './theme';
+import './authority';
 import {scaleSizeH, scaleSizeW, setSpText} from '../utils/screen';
 
 // 定义自适应屏幕的宽高函数
-global.scaleSizeH = scaleSizeH
-global.scaleSizeW = scaleSizeW
-global.setSpText  = setSpText
+global.scaleSizeH = scaleSizeH;
+global.scaleSizeW = scaleSizeW;
+global.setSpText = setSpText;
 
 // 定义全局的语言转换函数,必须用函数的形式,否则会报错 实例:_t('home.test') = 测试
 global._t = text => i18n.t(text);

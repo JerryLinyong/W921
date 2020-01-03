@@ -3,7 +3,7 @@ import React from 'react';
 import {createAppContainer} from 'react-navigation';
 import {createMaterialTopTabNavigator} from 'react-navigation-tabs';
 import {connect} from 'react-redux';
-import {getW921Pages} from './utils/getPages';
+import getPages from './utils/getPages';
 
 class MainTabNavigator extends React.Component {
   constructor(props) {
@@ -18,12 +18,7 @@ class MainTabNavigator extends React.Component {
     const tabBarStyle = {};
     // ====== 加载的页面 ====== //
     // 根据不同的app加载不同的页面
-    let pages = {};
-    if (this.props.app === 'hispro') {
-      pages = getW921Pages(this.props.pages);
-    } else if (this.props.app === '') {
-      pages = getW921Pages(this.props.pages);
-    }
+    let pages = getPages(this.props.app, this.props.pages);
     // 创建tabs
     const MainTabNavigator = createAppContainer(
       // createMaterialTopTabNavigator提供更多的功能
