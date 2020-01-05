@@ -5,39 +5,47 @@ import {Text, View} from 'react-native';
 import {connect} from 'react-redux';
 import {updateMySuccess} from '@store/my/actions';
 import {loadPages} from '@store/pages/actions';
-import {Button} from '@ant-design/react-native';
+import {Button, ActivityIndicator} from '@ant-design/react-native';
 
 class initScreen extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {loadingPage: false};
     this.loadApp(props.app);
   }
   // 当props值变化时,可以通过return值映射到state上
   static getDerivedStateFromProps(nextProps, prevState) {
-    const {error, isPageLoaded} = nextProps;
-    // 加载页面错误处理
-    if (error) {
-    }
-    // 加载页面成功,进行跳转
-    if (isPageLoaded) {
-      nextProps.navigation.replace('Main');
-    }
-    // 否则，对于state不进行任何操作,否则放回state要修改的值
     return null;
   }
   // 加载app页面
   loadApp(app) {
     if (!app) return;
     if (app !== this.props.app) {
-      this.props.updateMy({app});
+      this.props.updateMySuccess({app});
     }
     // 根据app加载相应页面
-    this.props.loadPages();
+    this.setState({loadingPage: true});
+    this.props.loadPages({callBack: this.callBack.bind(this)});
+  }
+  callBack(res) {
+    // 跳转到其他页面则不做处理
+    if (!this.props.navigation.isFocused()) return;
+    const {payload, status} = res;
+    // 加载页面成功,进行跳转
+    this.setState({loadingPage: false});
+    if (status === 'success') {
+      this.props.navigation.replace('Main');
+    } else {
+    }
   }
   render() {
     return (
       <View>
+        <ActivityIndicator
+          toast
+          animating={this.state.loadingPage}
+          text={'loading ' + this.props.app}
+        />
         <View style={{height: 30}}></View>
         <Button type="primary" onPress={this.loadApp.bind(this, 'w921')}>
           w921
@@ -53,15 +61,13 @@ class initScreen extends React.Component {
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    isPageLoaded: state.pages.get('loaded').get('load'),
     app: state.my.get('app'),
-    error: state.pages.get('errors').get('load'),
   };
 };
 
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
-    updateMy: data => dispatch(updateMySuccess(data)),
+    updateMySuccess: data => dispatch(updateMySuccess(data)),
     loadPages: data => dispatch(loadPages(data)),
   };
 };

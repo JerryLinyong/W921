@@ -17,13 +17,17 @@ export default function* areasWorkflow() {
       actions.REMOVE_PAGE,
       actions.UPDATE_PAGE,
     ]);
-    const TYPE = action.type;
-    if (TYPE === actions.LOAD_PAGES) {
+    const {params, callBack = () => {}} = action.payload;
+    const type = action.type;
+    if (type === actions.LOAD_PAGES) {
       try {
-        const {payload} = yield loadPages(actions.payload);
+        const {payload, status} = yield loadPages(params);
         yield put(loadPagesSuccess(payload));
+        callBack({payload, status});
       } catch (e) {
-        logger.error('加载所有页面失败:' + e);
+        const message = '加载所有页面失败:' + e;
+        logger.error(message);
+        callBack({status: 'fail', message});
       }
     }
   }

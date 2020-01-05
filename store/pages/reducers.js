@@ -4,9 +4,6 @@ import {Map, updateIn, update, remove, List, fromJS} from 'immutable';
 
 // 要加状态字段,判断是否加载成功
 let initPages = fromJS({
-  // 用于管理动作的状态
-  loaded: {}, // 是否加载动作加载成功
-  errors: {load: null}, // 是否加载动作存在错误
   pages: [],
 });
 let defaultPage = {};
@@ -15,13 +12,7 @@ export default handleActions(
   {
     // ================== 成功 ========================================== //
     // 加载所有页面
-    [actions.LOAD_PAGES_SUCCESS]: (state, action) =>
-      fromJS(
-        Object.assign(action.payload, {
-          loaded: {load: true},
-          errors: {},
-        }),
-      ),
+    [actions.LOAD_PAGES_SUCCESS]: (state, action) => fromJS(action.payload),
     // 增加页面
     [actions.ADD_PAGE_SUCCESS]: (state, action) => {
       return state.set(newPage.id, fromJS(action.payload));

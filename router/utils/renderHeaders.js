@@ -1,4 +1,7 @@
 // 通用的路由头部组件
+// static
+//   mapStateToProps:()=>{} // 连接仓库的store,传递prop值,和connect用法一样
+//   mapDispatchToProps:()=>{} // 连接仓库的store,传递action,和connect用法一样
 // props
 //   title: '未定义', // 路由title
 //   backable: true, // 是否在左侧显示返回按钮,默认 = true,点击会返回上一页
@@ -11,6 +14,8 @@ import React from 'react';
 import {View, Text, StatusBar, StyleSheet} from 'react-native';
 import {connect} from 'react-redux';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import {dissoc} from 'ramda';
+import getStoreProps from './getStoreProps';
 const styles = StyleSheet.create({
   header: {
     flexDirection: 'row',
@@ -26,12 +31,7 @@ const styles = StyleSheet.create({
   },
 });
 // 渲染头部组件
-// 连接仓库
-const mapStateToProps = (state, ownProps) => {
-  return {
-    theme: state.my.get('theme'), // 主题
-  };
-};
+
 function renderHeader(Dom) {
   const headerOptions = Object.assign(
     {
@@ -42,18 +42,30 @@ function renderHeader(Dom) {
     },
     Dom.navigationOptions,
   );
-  class newDom extends React.Component {
+  // 额外的state值
+  const extralState = (state, ownProps) => ({
+    headerTheme: state.my.get('theme'), // 头部主题
+  });
+  // 获取自定义的仓库值和动作
+  const {mapStateToProps, mapDispatchToProps} = getStoreProps(Dom, extralState);
+  class DomWithHeader extends React.Component {
+    constructor(props) {
+      super(props);
+      this.mainDomRef = React.createRef();
+    }
     goBack() {
       this.props.navigation.goBack();
     }
     // 点击头部图标,触发实例的onHeaderClick方法,传递突变名称
     onHeaderClick(type) {
-      if (typeof this.refs.MainDom.onHeaderClick === 'function') {
-        this.refs.MainDom.onHeaderClick(type);
+      if (typeof this.mainDomRef.current.onHeaderClick === 'function') {
+        this.mainDomRef.current.onHeaderClick(type);
       }
     }
     render() {
-      const primaryColor = themeProvider.get(this.props.theme).primary;
+      const primaryColor = themeProvider.get(this.props.headerTheme).primary;
+      // 头部特有的props值
+      const headerProps = ['headerTheme'];
       return (
         <View style={{height: '100%'}}>
           <View style={[styles.header, {backgroundColor: primaryColor}]}>
@@ -83,12 +95,12 @@ function renderHeader(Dom) {
               ) : null}
             </View>
           </View>
-          <Dom ref="MainDom"></Dom>
+          <Dom ref={this.mainDomRef} {...dissoc(headerProps)(this.props)}></Dom>
         </View>
       );
     }
   }
-  return connect(mapStateToProps)(newDom);
+  return connect(mapStateToProps, mapDispatchToProps)(DomWithHeader);
 }
 
 export default function renderHeaders(doms) {

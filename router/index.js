@@ -4,7 +4,7 @@ import {createAppContainer} from 'react-navigation';
 import {createStackNavigator} from 'react-navigation-stack';
 import initScreen from './init';
 import MainScreen from './main';
-import entry from './entry'; // 支持header自定义
+import entry from './entry'; // 支持header自定义,与仓库的数据连接定义在static
 import renderHeaders from './utils/renderHeaders';
 
 // 创建路由

@@ -1,6 +1,7 @@
 // 把store里面的路由转换成tabNav可以解析的数据
 import React from 'react';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import renderMain from './renderMain';
 // w921 页面
 import W921HomePage from '@w921/home';
 import W921MapPage from '@w921/map';
@@ -87,7 +88,7 @@ const allMainPages = {
 // params{Array}
 export default function getPages(app, pages) {
   let navPages = {};
-  let mainPages = allMainPages[app]
+  let mainPages = allMainPages[app];
   pages.forEach(page => {
     let defaultPage = mainPages[page.view] || commonPages.Error;
     navPages[page.view] = {

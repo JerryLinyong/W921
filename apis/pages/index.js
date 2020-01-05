@@ -14,7 +14,7 @@ export function loadPages() {
         ],
       },
     };
-    return mockHttp(mockData, 1000);
+    return mockHttp(mockData, 4000);
   } else {
     return http({
       url: '/pages/load',
