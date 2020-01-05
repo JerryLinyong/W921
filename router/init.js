@@ -1,10 +1,11 @@
 // 用于加载用户数据,加载完毕后进入主页面
 // 如果app未选择,则进行选择,否则直接进入
 import React from 'react';
-import {Text, View, Button} from 'react-native';
+import {Text, View} from 'react-native';
 import {connect} from 'react-redux';
 import {updateMySuccess} from '@store/my/actions';
 import {loadPages} from '@store/pages/actions';
+import {Button} from '@ant-design/react-native';
 
 class initScreen extends React.Component {
   constructor(props) {
@@ -38,19 +39,13 @@ class initScreen extends React.Component {
     return (
       <View>
         <View style={{height: 30}}></View>
-        <Button
-          onPress={this.loadApp.bind(this, 'w921')}
-          title="w921"
-          color="#841584"
-          accessibilityLabel="Learn more about this purple button"
-        />
+        <Button type="primary" onPress={this.loadApp.bind(this, 'w921')}>
+          w921
+        </Button>
         <View style={{height: 30}}></View>
-        <Button
-          onPress={this.loadApp.bind(this, 'voerkaMsg')}
-          title="voerkaMsg"
-          color="#841584"
-          accessibilityLabel="Learn more about this purple button"
-        />
+        <Button type="primary" onPress={this.loadApp.bind(this, 'voerkaMsg')}>
+          voerkaMsg
+        </Button>
       </View>
     );
   }
