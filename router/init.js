@@ -5,7 +5,7 @@ import {Text, View} from 'react-native';
 import {connect} from 'react-redux';
 import {updateMySuccess} from '@store/my/actions';
 import {loadPages} from '@store/pages/actions';
-import {Button, ActivityIndicator} from '@ant-design/react-native';
+import {Button, ActivityIndicator, Toast} from '@ant-design/react-native';
 
 class initScreen extends React.Component {
   constructor(props) {
@@ -30,12 +30,13 @@ class initScreen extends React.Component {
   callBack(res) {
     // 跳转到其他页面则不做处理
     if (!this.props.navigation.isFocused()) return;
-    const {payload, status} = res;
+    const {payload, status, message} = res;
     // 加载页面成功,进行跳转
     this.setState({loadingPage: false});
     if (status === 'success') {
       this.props.navigation.replace('Main');
     } else {
+      Toast.fail(_t('common.failed'), 3, null, false);
     }
   }
   render() {
@@ -44,9 +45,9 @@ class initScreen extends React.Component {
         <ActivityIndicator
           toast
           animating={this.state.loadingPage}
-          text={'loading ' + this.props.app}
+          text={this.props.app}
         />
-        <View style={{height: 30}}></View>
+        <View style={{height: scaleSizeH(30)}}></View>
         <Button type="primary" onPress={this.loadApp.bind(this, 'w921')}>
           w921
         </Button>

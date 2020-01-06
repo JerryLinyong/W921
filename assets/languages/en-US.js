@@ -1,3 +1,5 @@
 export default {
-  failed: 'failed',
+  common: {
+    failed: 'failed',
+  },
 };

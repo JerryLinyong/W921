@@ -11,6 +11,7 @@ global.setSpText = setSpText;
 
 // 定义全局的语言转换函数,必须用函数的形式,否则会报错 实例:_t('home.test') = 测试
 global._t = text => i18n.t(text);
+global.i18n = i18n;
 // 定义全局的打印
 global.logger = logger;
 // 定义全局的样式

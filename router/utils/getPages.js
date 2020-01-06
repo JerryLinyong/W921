@@ -92,14 +92,14 @@ export default function getPages(app, pages) {
   pages.forEach(page => {
     let defaultPage = mainPages[page.view] || commonPages.Error;
     navPages[page.view] = {
-      screen: defaultPage.screen,
+      screen: renderMain(defaultPage.screen),
       navigationOptions: {
         tabBarLabel: page.label || defaultPage.label,
         tabBarIcon: ({tintColor}) => (
           <Icon
             name={page.icon || defaultPage.icon}
             color={tintColor}
-            size={24}
+            size={setSpText(24)}
           />
         ),
       },

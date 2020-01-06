@@ -21,12 +21,12 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    paddingVertical: 10,
-    height: 50,
+    paddingVertical: scaleSizeH(10),
+    height: scaleSizeH(50),
   },
   icon: {
-    padding: 10,
-    fontSize: 12,
+    padding: scaleSizeH(10),
+    fontSize: setSpText(12),
     color: 'white',
   },
 });

@@ -2,7 +2,7 @@
 // static
 //   mapStateToProps:()=>{} // 连接仓库的store,传递prop值,和connect用法一样
 //   mapDispatchToProps:()=>{} // 连接仓库的store,传递action,和connect用法一样
-export default function getStoreProps(Dom, extralStates = () => {}) {
+export default function getStoreProps(Dom, extralStates = () => ({})) {
   // 连接仓库
   const mapStateToProps = (state, ownProps) => {
     let storeProps = extralStates(state, ownProps);

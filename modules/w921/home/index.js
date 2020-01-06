@@ -1,10 +1,19 @@
 import React from 'react';
 import {Text, View} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import {connect} from 'react-redux';
 import {updateMySuccess} from '@store/my/actions';
 
-class HomeScreen extends React.Component {
+export default class HomeScreen extends React.Component {
+  static mapStateToProps = (state, ownProps) => {
+    return {
+      theme: state.my.get('theme'), // 主题
+    };
+  };
+  static mapDispatchToProps = (dispatch, ownProps) => {
+    return {
+      updateMy: data => dispatch(updateMySuccess(data)),
+    };
+  };
   componentDidMount() {}
   onHeaderClick(type) {}
   render() {
@@ -17,16 +26,3 @@ class HomeScreen extends React.Component {
     );
   }
 }
-const mapStateToProps = (state, ownProps) => {
-  return {
-    theme: state.my.get('theme'), // 主题
-  };
-};
-
-const mapDispatchToProps = (dispatch, ownProps) => {
-  return {
-    updateMy: data => dispatch(updateMySuccess(data)),
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(HomeScreen);
