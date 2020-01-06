@@ -23,7 +23,7 @@ let screenW = Dimensions.get('window').width;
 let screenH = Dimensions.get('window').height;
 let fontScale = PixelRatio.getFontScale();
 let pixelRatio = PixelRatio.get();
-// 高保真的宽度和告诉
+// 高保真的宽度和高度
 const designWidth = 750.0;
 const designHeight = 1334.0;
 

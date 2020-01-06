@@ -1,5 +1,5 @@
+// 定义全局的打印模块logger
 import {logger as rnLogger, chromeConsoleSyncTransport} from 'react-native-logs';
-
 // msg: any
 // level: { severity: number; text: string }
 // cb?: () => boolean

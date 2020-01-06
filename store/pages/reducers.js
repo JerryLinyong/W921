@@ -4,9 +4,16 @@ import {Map, updateIn, update, remove, List, fromJS} from 'immutable';
 
 // 要加状态字段,判断是否加载成功
 let initPages = fromJS({
-  pages: [],
+  showTabBar: false, // 是否展示底部按钮
+  pages: [], // 所有页面
 });
-let defaultPage = {};
+// 默认的页面参数
+let defaultPage = {
+  view: '', // 页面id.如 Home
+  params: {}, // 页面 props
+  icon: '', // 页面对应的icon
+  label: '', // 页面对应的label
+};
 
 export default handleActions(
   {

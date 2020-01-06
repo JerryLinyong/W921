@@ -1,3 +1,4 @@
+// 定义全局的主题themeProvider
 import defaultTheme from '../assets/themes/default';
 import redTheme from '../assets/themes/red';
 let themes = {default: defaultTheme, red: redTheme};

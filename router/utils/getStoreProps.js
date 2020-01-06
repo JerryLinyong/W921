@@ -1,26 +1,34 @@
-// dom 通过static 获取的仓库的props 和 actions
-// static
+// 通过定义commonStates和commonDispatchs,可以定义一些主页面共有的仓库props值,如theme
+// 
+// static(dom 通过static 获取的仓库的props 和 actions,只支持主页面父元素,子元素不支持)
 //   mapStateToProps:()=>{} // 连接仓库的store,传递prop值,和connect用法一样
 //   mapDispatchToProps:()=>{} // 连接仓库的store,传递action,和connect用法一样
-export default function getStoreProps(Dom, extralStates = () => ({})) {
+export default function getStoreProps(Dom) {
+  // 通用的states
+  let commonStates = (state, ownProps) => ({
+    // 默认将主题注入所有的主页面
+    theme: state.my.get('theme'),
+  });
+  // 通用的dispatch
+  let commonDispatchs = (dispatch, ownProps) => ({});
   // 连接仓库
   const mapStateToProps = (state, ownProps) => {
-    let storeProps = extralStates(state, ownProps);
+    let storeStates = commonStates(state, ownProps);
     if (typeof Dom.mapStateToProps === 'function') {
-      let domStoreProps = Dom.mapStateToProps(state, ownProps);
       // 页面的props值
-      storeProps = Object.assign(storeProps, domStoreProps);
+      let domStoreProps = Dom.mapStateToProps(state, ownProps);
+      storeStates = Object.assign(storeStates, domStoreProps);
     }
-    return storeProps;
+    return storeStates;
   };
   const mapDispatchToProps = (dispatch, ownProps) => {
+    let storeDispatchs = commonDispatchs(dispatch, ownProps);
     if (typeof Dom.mapDispatchToProps === 'function') {
-      let domStoreActions = Dom.mapDispatchToProps(dispatch, ownProps);
       // 页面的actions值
-      return domStoreActions;
-    } else {
-      return {};
+      let domStoreActions = Dom.mapDispatchToProps(dispatch, ownProps);
+      storeDispatchs = Object.assign(storeDispatchs, domStoreActions);
     }
+    return storeDispatchs;
   };
   return {mapStateToProps, mapDispatchToProps}; // 返回dom自定义的props,actions
 }

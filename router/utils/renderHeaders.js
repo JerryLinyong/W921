@@ -14,19 +14,18 @@ import React from 'react';
 import {View, Text, StatusBar, StyleSheet} from 'react-native';
 import {connect} from 'react-redux';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import {dissoc} from 'ramda';
 import getStoreProps from './getStoreProps';
 const styles = StyleSheet.create({
   header: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    paddingVertical: scaleSizeH(10),
-    height: scaleSizeH(50),
+    paddingVertical: scaleSizeH(40),
+    height: scaleSizeH(140),
   },
   icon: {
-    padding: scaleSizeH(10),
-    fontSize: setSpText(12),
+    padding: scaleSizeH(30),
+    fontSize: setSpText(60),
     color: 'white',
   },
 });
@@ -42,12 +41,8 @@ function renderHeader(Dom) {
     },
     Dom.navigationOptions,
   );
-  // 额外的state值
-  const extralState = (state, ownProps) => ({
-    headerTheme: state.my.get('theme'), // 头部主题
-  });
   // 获取自定义的仓库值和动作
-  const {mapStateToProps, mapDispatchToProps} = getStoreProps(Dom, extralState);
+  const {mapStateToProps, mapDispatchToProps} = getStoreProps(Dom);
   class DomWithHeader extends React.Component {
     constructor(props) {
       super(props);
@@ -58,14 +53,15 @@ function renderHeader(Dom) {
     }
     // 点击头部图标,触发实例的onHeaderClick方法,传递突变名称
     onHeaderClick(type) {
-      if (typeof this.mainDomRef.current.onHeaderClick === 'function') {
+      if (
+        this.mainDomRef.current &&
+        typeof this.mainDomRef.current.onHeaderClick === 'function'
+      ) {
         this.mainDomRef.current.onHeaderClick(type);
       }
     }
     render() {
-      const primaryColor = themeProvider.get(this.props.headerTheme).primary;
-      // 头部特有的props值
-      const headerProps = ['headerTheme'];
+      const primaryColor = themeProvider.get(this.props.theme).primary;
       return (
         <View style={{height: '100%'}}>
           <View style={[styles.header, {backgroundColor: primaryColor}]}>
@@ -95,7 +91,7 @@ function renderHeader(Dom) {
               ) : null}
             </View>
           </View>
-          <Dom ref={this.mainDomRef} {...dissoc(headerProps)(this.props)}></Dom>
+          <Dom ref={this.mainDomRef} {...this.props}></Dom>
         </View>
       );
     }

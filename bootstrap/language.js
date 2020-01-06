@@ -1,3 +1,4 @@
+// 定义全局的语言,可以通过i18n.locale来进行修改语言类型
 import i18n from 'react-native-i18n';
 import en_US from '../assets/languages/en-US';
 import zh_CN from '../assets/languages/zh-CN';

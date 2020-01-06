@@ -14,8 +14,10 @@ class MainTabNavigator extends React.Component {
     const primaryColor = themeProvider.get(this.props.theme).primary;
     // ====== 样式 ====== //
     // 选项卡是否可见
-    // const tabBarStyle = {display: 'none'};
-    const tabBarStyle = {};
+    let tabBarStyle = {display: 'none'};
+    if (this.props.showTabBar) {
+      delete tabBarStyle.display;
+    }
     // ====== 加载的页面 ====== //
     // 根据不同的app加载不同的页面
     let pages = getPages(this.props.app, this.props.pages);
@@ -51,6 +53,7 @@ class MainTabNavigator extends React.Component {
 const mapStateToProps = (state, ownProps) => {
   return {
     pages: state.pages.get('pages').toJS(), // 加载的页面
+    showTabBar: state.pages.get('showTabBar'), // 是否显示tabBar
     theme: state.my.get('theme'), // 主题
     app: state.my.get('app'), // app的类型
   };
