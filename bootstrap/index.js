@@ -4,6 +4,10 @@ import logger from './logger';
 import themeProvider from './theme';
 import './authority';
 import {scaleSizeH, scaleSizeW, setSpText} from '../utils/screen';
+import PropTypes from 'prop-types'; // ES6
+
+// 页面的props类型校验
+global.PropTypes = PropTypes;
 
 // 定义自适应屏幕的宽高函数
 global.scaleSizeH = scaleSizeH;

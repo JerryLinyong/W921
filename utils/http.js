@@ -30,7 +30,6 @@ function getApiResponseMessage(response) {
     if (response.status && response.status in ApiResponseStatus) {
       return response.message || ApiResponseStatus[response.status];
     } else {
-      logger.debug(response);
       return _t('http.errorMsg');
     }
   }
@@ -48,12 +47,11 @@ const apiRequestInterceptor = [
     config.url = SERVER_ADDRESS + config.url;
     // 验证URL
     if (validateUrl(config.url)) {
-      logger.error('url格式错误:' + config.url);
+      throw new Error('url格式错误');
     }
     return config;
   },
   error => {
-    logger.error(error);
     return Promise.reject(error);
   },
 ];
@@ -66,12 +64,10 @@ const apiResponseInterceptor = [
     if (apiAnswerMessage === true) {
       return res;
     } else {
-      logger.error('发送http请求错误:' + apiAnswerMessage);
       return Promise.reject(apiAnswerMessage);
     }
   },
   error => {
-    logger.error('发送http请求错误:' + error);
     return Promise.reject(error);
   },
 ];
