@@ -4,6 +4,10 @@ import logger from './logger';
 import './authority';
 import {scaleSizeH, scaleSizeW, setSpText} from '../utils/screen';
 import PropTypes from 'prop-types'; // ES6
+import {isEmpty} from 'xe-utils';
+
+// 全局的通用函数
+global.isEmpty = isEmpty;
 
 // 页面的props类型校验
 global.PropTypes = PropTypes;

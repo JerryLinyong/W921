@@ -10,6 +10,7 @@ import Menu from '@components/menu';
 import Header from '@components/menuBar';
 import BottomDrawer from '@components/bottomDrawer';
 import {Button, ActivityIndicator, Toast} from '@ant-design/react-native';
+import Test from '@components/test';
 
 export default class HomeScreen extends React.Component {
   constructor(props) {
@@ -33,6 +34,7 @@ export default class HomeScreen extends React.Component {
       onPress: this.pressIcon.bind(this, iconName),
     }));
     this.state = {
+      count: 0,
       num: 3,
       curentArea: '1',
       area: [
@@ -144,6 +146,12 @@ export default class HomeScreen extends React.Component {
             i18n.locale = 'en-US';
           }}>
           en-US
+        </Button>
+        <Test count={this.state.count}></Test>
+        <Button
+          type="primary"
+          onPress={() => this.setState({count: this.state.count + 1})}>
+          +1
         </Button>
         <Button
           type="primary"

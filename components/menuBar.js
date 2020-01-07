@@ -87,9 +87,9 @@ export default class MenuBar extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      defaultComponents: this.setDefaultComponents(props.style.color),
       headerStyle: this.setHeaderStyle(props.style.backgroundColor),
       titleStyle: this.setTitleStyle(props.style.color),
+      defaultComponents: this.setDefaultComponents(props.style.color),
       subTitleStyle: this.setSubTitleStyle(props.style.color),
     };
   }
@@ -119,6 +119,25 @@ export default class MenuBar extends Component {
         style: {marginLeft: scaleSizeW(10)},
       },
     };
+  }
+  shouldComponentUpdate(nextProps, nextState) {
+    let newState = {};
+    if (nextProps.style.color !== this.props.color) {
+      newState.titleStyle = this.setTitleStyle(nextProps.style.color);
+      newState.defaultComponents = this.setTitleStyle(nextProps.style.color);
+      newState.subTitleStyle = this.setTitleStyle(nextProps.style.color);
+    }
+    if (nextProps.style.backgroundColor !== this.props.backgroundColor) {
+      newState.headerStyle = this.setHeaderStyle(
+        nextProps.style.backgroundColor,
+      );
+    }
+    if (!isEmpty(newState)) {
+      this.setState(newState);
+      return false;
+    } else {
+      return true;
+    }
   }
   // 渲染自定义组件
   renderDom(components = []) {
