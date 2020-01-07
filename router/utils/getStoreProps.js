@@ -6,8 +6,9 @@
 export default function getStoreProps(Dom) {
   // 通用的states
   let commonStates = (state, ownProps) => ({
-    // 默认将主题注入所有的主页面
+    // 默认将主题注入所有的主页面,主题和语言变换默认会修改重新渲染所有页面,把用到theme和language的参数设置在constructor里面可以减少渲染
     theme: state.theme,
+    language: state.my.get('language'),
   });
   // 通用的dispatch
   let commonDispatchs = (dispatch, ownProps) => ({});

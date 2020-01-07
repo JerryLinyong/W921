@@ -5,6 +5,7 @@ import {Map, updateIn, update, remove, List, fromJS} from 'immutable';
 let initMy = fromJS({
   app: '', // 本机的app类型,根据类型呈现不同的页面,为空则要进行选择
   theme: 'default', // 主题
+  language: 'zh-CN',
 });
 
 export default handleActions(

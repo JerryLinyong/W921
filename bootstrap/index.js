@@ -27,6 +27,8 @@ global.isDev = true;
 if (isDev) {
   // 开发模式,全部打印
   logger.setSeverity('debug');
+  // 设置本地的环境为中文
+  i18n.locale = 'zh-CN';
 } else {
   // 发布模式,只打印错误
   logger.setSeverity('error');

@@ -18,11 +18,28 @@
  *
  *  实例
  *    import MenuBar from '@components/menuBar';
+ *    // 防止重复渲染,把参数设置再state里面,然后通过方法set*才可以修改state的值
+ *    constructor(props) {
+ *      this.state={
+ *        menuStyle: this.setMenuStyle(),
+ *        menuCenterComponents: this.setMenuCenterComponents(),
+ *        menuRightComponents: this.setMenuRightComponents(),
+ *      }
+ *    }
+ *    setMenuStyle(){
+ *      return {color:'white',backgroundColor:'red'}
+ *    }
+ *    setMenuCenterComponents(){
+ *      return [{type: 'timer'}]
+ *    }
+ *    setMenuRightComponents(){
+ *      return []
+ *    }
  *    <MenuBar
- *      theme={this.props.theme}
+ *      style={this.state.menuStyle}
  *      title="无线管理主机"
- *      centerComponents={[{type: 'timer'}]}
- *      rightComponents={[]}
+ *      centerComponents={this.state.menuCenterComponents}
+ *      rightComponents={this.state.menuRightComponents}
  *    />
  */
 import React, {Component} from 'react';
@@ -54,7 +71,7 @@ const styles = StyleSheet.create({
 
 export default class MenuBar extends Component {
   static proptypes = {
-    theme: PropTypes.string,
+    style: PropTypes.object,
     title: PropTypes.string,
     subTitle: PropTypes.string,
     centerComponents: PropTypes.array,
@@ -63,23 +80,42 @@ export default class MenuBar extends Component {
   static defaultProps = {
     title: '',
     subTitle: '',
-    theme: '',
+    style: {},
     centerComponents: [],
     rightComponents: [],
   };
   constructor(props) {
     super(props);
-    const primaryText = props.theme.get('primaryText');
-    this.defaultComponents = {
+    this.state = {
+      defaultComponents: this.setDefaultComponents(props.style.color),
+      headerStyle: this.setHeaderStyle(props.style.backgroundColor),
+      titleStyle: this.setTitleStyle(props.style.color),
+      subTitleStyle: this.setSubTitleStyle(props.style.color),
+    };
+  }
+  setTitleStyle(color) {
+    return Object.assign({}, styles.title, {color: color});
+  }
+  setSubTitleStyle(color) {
+    return Object.assign({}, styles.subTitle, {
+      color: color,
+    });
+  }
+  setHeaderStyle(backgroundColor) {
+    return Object.assign({}, styles.header, {backgroundColor: backgroundColor});
+  }
+  // 设置默认的组件
+  setDefaultComponents(color) {
+    return {
       view: {screen: View},
       clock: {
         screen: Clock,
-        style: {color: primaryText, fontSize: setSpText(40)},
+        style: {color: color, fontSize: setSpText(40)},
       },
-      text: {screen: Text, style: {color: primaryText}},
+      text: {screen: Text, style: {color: color}},
       icon: {
         screen: Icon,
-        params: {color: primaryText, size: setSpText(70)},
+        params: {color: color, size: setSpText(70)},
         style: {marginLeft: scaleSizeW(10)},
       },
     };
@@ -88,7 +124,8 @@ export default class MenuBar extends Component {
   renderDom(components = []) {
     return components.map((component, index) => {
       let defaultComponent =
-        this.defaultComponents[component.type] || this.defaultComponents.view;
+        this.state.defaultComponents[component.type] ||
+        this.state.defaultComponents.view;
       let Dom;
       if (component.type === 'customised') {
         Dom = component.component;
@@ -111,18 +148,12 @@ export default class MenuBar extends Component {
     });
   }
   render() {
-    const primaryColor = this.props.theme.get('primary');
-    const primaryText = this.props.theme.get('primaryText');
     return (
-      <View style={[styles.header, {backgroundColor: primaryColor}]}>
+      <View style={this.state.headerStyle}>
         <View style={styles.left}>
-          <Text style={[styles.title, {color: primaryText}]}>
-            {this.props.title}
-          </Text>
+          <Text style={this.state.titleStyle}>{this.props.title}</Text>
           {this.props.subTitle ? (
-            <Text style={[styles.subTitle, {color: primaryText}]}>
-              {this.props.subTitle}
-            </Text>
+            <Text style={this.state.subTitleStyle}>{this.props.subTitle}</Text>
           ) : null}
         </View>
         <View style={styles.center}>

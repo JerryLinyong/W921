@@ -9,10 +9,16 @@ import {Toolbar} from './components/topToolbar';
 import Menu from '@components/menu';
 import Header from '@components/menuBar';
 import BottomDrawer from '@components/bottomDrawer';
+import {Button, ActivityIndicator, Toast} from '@ant-design/react-native';
 
 export default class HomeScreen extends React.Component {
   constructor(props) {
     super(props);
+    this.headerStyle = {
+      backgroundColor: props.theme.get('primary'),
+      color: props.theme.get('primaryText'),
+    };
+    this.headerCenterComponents = [{type: 'clock'}];
     this.headerRightComponents = [
       'home',
       'email',
@@ -132,10 +138,23 @@ export default class HomeScreen extends React.Component {
     return (
       <View style={{backgroundColor: '#fff'}}>
         {/* 公共头部 */}
+        <Button
+          type="primary"
+          onPress={() => {
+            i18n.locale = 'en-US';
+          }}>
+          en-US
+        </Button>
+        <Button
+          type="primary"
+          onPress={() => this.props.updateMy({theme: 'red'})}>
+          red
+        </Button>
+        <Text>{_t('common.failed')}</Text>
         <Header
-          theme={this.props.theme}
+          style={this.headerStyle}
           title="无线管理主机"
-          centerComponents={[{type: 'clock'}]}
+          centerComponents={this.headerCenterComponents}
           rightComponents={this.headerRightComponents}
         />
         {/* 首页内容 */}
