@@ -9,7 +9,7 @@ export default function renderMain(Dom, params = {}) {
       super(props);
     }
     render() {
-      return <Dom {...params} />;
+      return <Dom {...Object.assign(params, this.props)} />;
     }
   }
   // 获取自定义的仓库值和动作

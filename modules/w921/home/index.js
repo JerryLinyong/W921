@@ -94,9 +94,7 @@ export default class HomeScreen extends React.Component {
     };
   }
   static mapStateToProps = (state, ownProps) => {
-    return {
-      theme: state.my.get('theme'), // 主题
-    };
+    return {};
   };
   static mapDispatchToProps = (dispatch, ownProps) => {
     return {

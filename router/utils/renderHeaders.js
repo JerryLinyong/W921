@@ -61,7 +61,7 @@ function renderHeader(Dom) {
       }
     }
     render() {
-      const primaryColor = themeProvider.get(this.props.theme).primary;
+      const primaryColor = this.props.theme.get('primary');
       return (
         <View style={{height: '100%'}}>
           <View style={[styles.header, {backgroundColor: primaryColor}]}>

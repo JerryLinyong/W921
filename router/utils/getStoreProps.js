@@ -1,5 +1,5 @@
 // 通过定义commonStates和commonDispatchs,可以定义一些主页面共有的仓库props值,如theme
-// 
+//
 // static(dom 通过static 获取的仓库的props 和 actions,只支持主页面父元素,子元素不支持)
 //   mapStateToProps:()=>{} // 连接仓库的store,传递prop值,和connect用法一样
 //   mapDispatchToProps:()=>{} // 连接仓库的store,传递action,和connect用法一样
@@ -7,7 +7,7 @@ export default function getStoreProps(Dom) {
   // 通用的states
   let commonStates = (state, ownProps) => ({
     // 默认将主题注入所有的主页面
-    theme: state.my.get('theme'),
+    theme: state.theme,
   });
   // 通用的dispatch
   let commonDispatchs = (dispatch, ownProps) => ({});

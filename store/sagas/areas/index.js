@@ -6,7 +6,7 @@
 
 import {delay} from 'redux-saga';
 import {take} from 'redux-saga/effects';
-import * as actions from '../../areas/actionTypes';
+import * as actions from '@store/areas/actionTypes';
 
 export default function* areasWorkflow() {
   while (true) {

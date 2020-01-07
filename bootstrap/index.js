@@ -1,7 +1,6 @@
 // 注册全局的方法
 import i18n from './language';
 import logger from './logger';
-import themeProvider from './theme';
 import './authority';
 import {scaleSizeH, scaleSizeW, setSpText} from '../utils/screen';
 import PropTypes from 'prop-types'; // ES6
@@ -19,8 +18,6 @@ global._t = text => i18n.t(text);
 global.i18n = i18n;
 // 定义全局的打印
 global.logger = logger;
-// 定义全局的样式,获取主题方法:themeProvider.get(this.props.theme).primary
-global.themeProvider = themeProvider;
 // 后台服务器地址
 global.SERVER_ADDRESS = 'http://192.168.116.126:8081';
 

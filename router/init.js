@@ -47,13 +47,27 @@ class initScreen extends React.Component {
           animating={this.state.loadingPage}
           text={this.props.app}
         />
-        <View style={{height: scaleSizeH(30)}}></View>
         <Button type="primary" onPress={this.loadApp.bind(this, 'w921')}>
           w921
         </Button>
-        <View style={{height: 30}}></View>
         <Button type="primary" onPress={this.loadApp.bind(this, 'voerkaMsg')}>
           voerkaMsg
+        </Button>
+        <Button
+          type="primary"
+          onPress={() => this.props.updateMySuccess({theme: 'red'})}>
+          red
+        </Button>
+        <Button
+          type="primary"
+          onPress={() => this.props.updateMySuccess({theme: 'default'})}>
+          default
+        </Button>
+        <Button type="primary" onPress={() => (i18n.locale = 'en-US')}>
+          en-US
+        </Button>
+        <Button type="primary" onPress={() => (i18n.locale = 'zh-CN')}>
+          zh-CN
         </Button>
       </View>
     );

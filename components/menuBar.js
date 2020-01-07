@@ -69,7 +69,7 @@ export default class MenuBar extends Component {
   };
   constructor(props) {
     super(props);
-    const primaryText = themeProvider.get(props.theme).primaryText;
+    const primaryText = props.theme.get('primaryText');
     this.defaultComponents = {
       view: {screen: View},
       clock: {
@@ -111,8 +111,8 @@ export default class MenuBar extends Component {
     });
   }
   render() {
-    const primaryColor = themeProvider.get(this.props.theme).primary;
-    const primaryText = themeProvider.get(this.props.theme).primaryText;
+    const primaryColor = this.props.theme.get('primary');
+    const primaryText = this.props.theme.get('primaryText');
     return (
       <View style={[styles.header, {backgroundColor: primaryColor}]}>
         <View style={styles.left}>
