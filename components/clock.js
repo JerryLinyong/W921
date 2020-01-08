@@ -1,6 +1,8 @@
 /**
  * 时间显示器,每秒更新时间显示
- *  通过设置style来变换时间的颜色和大小
+ * 通过设置style来变换时间的颜色和大小
+ *  props
+ *    style // 时钟的文字样式
  */
 import React from 'react';
 import {View, Text, StyleSheet} from 'react-native';
@@ -10,35 +12,34 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
 });
-export default class TimeRecorder extends React.Component {
-  static proptypes = {};
-  static defaultProps = {};
+const weeks = ['Sun', 'Mon', 'Tues', 'Wed', 'Thurs', 'Fri', 'Sat'];
+export default class Clock extends React.Component {
+  static proptypes = {style: PropTypes.object};
+  static defaultProps = {style: {}};
   constructor(props) {
     super(props);
-    const weeksArray = ['Sun', 'Mon', 'Tues', 'Wed', 'Thurs', 'Fri', 'Sat'];
-    this.state = {localDate: ' ', localTime: '', week: ''};
     this.timer = setInterval(() => {
-      let day = dayjs();
-      let week = _t(`common.${weeksArray[day.day()]}`);
-      let localDate = day.format('YYYY/MM/DD');
-      let localTime = day.format('HH:mm:ss');
-      this.setState({localDate, localTime, week});
+      this.setState(this.setClockInfo());
     }, 1000);
+    this.state = this.setClockInfo();
+  }
+  setClockInfo() {
+    let day = dayjs();
+    let week = _t(`common.${weeks[day.day()]}`);
+    let localDate = day.format('YYYY/MM/DD');
+    let localTime = day.format('HH:mm:ss');
+    return {week, localDate, localTime};
   }
   componentWillUnmount() {
     clearInterval(this.timer);
   }
   render() {
-    const textStyle = {
-      color: this.props.style.color,
-      fontSize: this.props.style.fontSize,
-    };
     return (
       <View style={styles.clock}>
-        <Text style={textStyle}>
+        <Text style={this.props.style}>
           {this.state.localDate + ' ' + this.state.week}
         </Text>
-        <Text style={textStyle}>{this.state.localTime}</Text>
+        <Text style={this.props.style}>{this.state.localTime}</Text>
       </View>
     );
   }

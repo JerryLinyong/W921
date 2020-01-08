@@ -27,7 +27,7 @@
  *      }
  *    }
  *    setMenuStyle(){
- *      return {color:'white',backgroundColor:'red'}
+ *      return {backgroundColor:'red'}
  *    }
  *    setMenuCenterComponents(){
  *      return [{type: 'timer'}]
@@ -37,7 +37,7 @@
  *    }
  *    <MenuBar
  *      style={this.state.menuStyle}
- *      title="无线管理主机"
+ *      centerComponents={this.state.menuCenterComponents}
  *      centerComponents={this.state.menuCenterComponents}
  *      rightComponents={this.state.menuRightComponents}
  *    />
@@ -46,6 +46,7 @@ import React, {Component} from 'react';
 import {View, Text, TouchableWithoutFeedback, StyleSheet} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import Clock from './clock';
+import Title from './title';
 
 const styles = StyleSheet.create({
   header: {
@@ -55,11 +56,8 @@ const styles = StyleSheet.create({
     height: scaleSizeH(130),
     padding: scaleSizeH(40),
   },
-  title: {
-    fontSize: setSpText(50),
-  },
-  subTitle: {
-    fontSize: setSpText(36),
+  left: {
+    flexDirection: 'row',
   },
   center: {
     flexDirection: 'row',
@@ -70,86 +68,45 @@ const styles = StyleSheet.create({
 });
 
 export default class MenuBar extends Component {
-  static proptypes = {
+  static propTypes = {
     style: PropTypes.object,
-    title: PropTypes.string,
-    subTitle: PropTypes.string,
+    leftComponents: PropTypes.array,
     centerComponents: PropTypes.array,
     rightComponents: PropTypes.array,
   };
   static defaultProps = {
-    title: '',
-    subTitle: '',
     style: {},
+    leftComponents: [],
     centerComponents: [],
     rightComponents: [],
   };
   constructor(props) {
     super(props);
-    this.state = {
-      headerStyle: this.setHeaderStyle(props.style.backgroundColor),
-      titleStyle: this.setTitleStyle(props.style.color),
-      defaultComponents: this.setDefaultComponents(props.style.color),
-      subTitleStyle: this.setSubTitleStyle(props.style.color),
-    };
-  }
-  setTitleStyle(color) {
-    return Object.assign({}, styles.title, {color: color});
-  }
-  setSubTitleStyle(color) {
-    return Object.assign({}, styles.subTitle, {
-      color: color,
-    });
-  }
-  setHeaderStyle(backgroundColor) {
-    return Object.assign({}, styles.header, {backgroundColor: backgroundColor});
-  }
-  // 设置默认的组件
-  setDefaultComponents(color) {
-    return {
-      view: {screen: View},
+    this.defaultComponents = {
+      view: {component: View},
       clock: {
-        screen: Clock,
-        style: {color: color, fontSize: setSpText(40)},
+        component: Clock,
+        style: {fontSize: setSpText(40)},
       },
-      text: {screen: Text, style: {color: color}},
+      title: {component: Title},
+      text: {component: Text},
       icon: {
-        screen: Icon,
-        params: {color: color, size: setSpText(70)},
+        component: Icon,
         style: {marginLeft: scaleSizeW(10)},
+        params: {size: setSpText(70)},
       },
     };
-  }
-  shouldComponentUpdate(nextProps, nextState) {
-    let newState = {};
-    if (nextProps.style.color !== this.props.color) {
-      newState.titleStyle = this.setTitleStyle(nextProps.style.color);
-      newState.defaultComponents = this.setTitleStyle(nextProps.style.color);
-      newState.subTitleStyle = this.setTitleStyle(nextProps.style.color);
-    }
-    if (nextProps.style.backgroundColor !== this.props.backgroundColor) {
-      newState.headerStyle = this.setHeaderStyle(
-        nextProps.style.backgroundColor,
-      );
-    }
-    if (!isEmpty(newState)) {
-      this.setState(newState);
-      return false;
-    } else {
-      return true;
-    }
+    this.state = {};
   }
   // 渲染自定义组件
   renderDom(components = []) {
     return components.map((component, index) => {
-      let defaultComponent =
-        this.state.defaultComponents[component.type] ||
-        this.state.defaultComponents.view;
+      let defaultComponent = this.defaultComponents[component.type];
       let Dom;
       if (component.type === 'customised') {
         Dom = component.component;
       } else {
-        Dom = defaultComponent.screen;
+        Dom = defaultComponent.component;
       }
       const params = Object.assign(
         {},
@@ -168,12 +125,9 @@ export default class MenuBar extends Component {
   }
   render() {
     return (
-      <View style={this.state.headerStyle}>
+      <View style={[styles.header, this.props.style]}>
         <View style={styles.left}>
-          <Text style={this.state.titleStyle}>{this.props.title}</Text>
-          {this.props.subTitle ? (
-            <Text style={this.state.subTitleStyle}>{this.props.subTitle}</Text>
-          ) : null}
+          {this.renderDom(this.props.leftComponents)}
         </View>
         <View style={styles.center}>
           {this.renderDom(this.props.centerComponents)}

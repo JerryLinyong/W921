@@ -1,35 +1,16 @@
-import React from 'react';
-import {Text, View, TouchableWithoutFeedback, ScrollView} from 'react-native';
-import {StyleSheet} from 'react-native';
+import React, {useState, useEffect} from 'react';
+import {Text, View} from 'react-native';
 
-const styles = StyleSheet.create({
-  icon: {
-    fontSize: 20,
-    color: 'white',
-  },
-});
-
-class AskForAddCardModal extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {count: 0};
-  }
-  shouldComponentUpdate(nextProps, nextState) {
-    console.log(nextProps.count, this.props.count);
-    if (nextProps.count !== nextState.count) {
-      this.setState({count: nextProps.count});
-      return false;
-    }
-    return true;
-  }
-  render() {
-    console.log('gaga');
-    return (
-      <View>
-        <Text>{this.props.count}</Text>
-        <Text>{this.state.count}</Text>
-      </View>
-    );
-  }
+export default function title(props) {
+  const [count, setCount] = useState(props.count);
+  useEffect(() => {
+    console.log(count);
+    setCount(pre => pre + 1);
+  }, [props.count]);
+  return (
+    <View>
+      <Text>{props.count}</Text>
+      <Text>{count}</Text>
+    </View>
+  );
 }
-export default AskForAddCardModal;

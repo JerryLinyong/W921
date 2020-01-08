@@ -150,7 +150,12 @@ export default class HomeScreen extends React.Component {
         <Test count={this.state.count}></Test>
         <Button
           type="primary"
-          onPress={() => this.setState({count: this.state.count + 1})}>
+          onPress={() => {
+            this.setState({
+              count:
+                this.state.count < 5 ? this.state.count + 2 : this.state.count,
+            });
+          }}>
           +1
         </Button>
         <Button
@@ -161,7 +166,7 @@ export default class HomeScreen extends React.Component {
         <Text>{_t('common.failed')}</Text>
         <Header
           style={this.headerStyle}
-          title="无线管理主机"
+          leftComponents={[{type: 'title', params: {title: '无线管理主机'}}]}
           centerComponents={this.headerCenterComponents}
           rightComponents={this.headerRightComponents}
         />
