@@ -4,7 +4,7 @@
  *  props
  *    style // 时钟的文字样式
  */
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import {View, Text, StyleSheet} from 'react-native';
 import dayjs from 'dayjs';
 const styles = StyleSheet.create({
@@ -13,34 +13,29 @@ const styles = StyleSheet.create({
   },
 });
 const weeks = ['Sun', 'Mon', 'Tues', 'Wed', 'Thurs', 'Fri', 'Sat'];
-export default class Clock extends React.Component {
-  static proptypes = {style: PropTypes.object};
-  static defaultProps = {style: {}};
-  constructor(props) {
-    super(props);
-    this.timer = setInterval(() => {
-      this.setState(this.setClockInfo());
-    }, 1000);
-    this.state = this.setClockInfo();
-  }
-  setClockInfo() {
-    let day = dayjs();
-    let week = _t(`common.${weeks[day.day()]}`);
-    let localDate = day.format('YYYY/MM/DD');
-    let localTime = day.format('HH:mm:ss');
-    return {week, localDate, localTime};
-  }
-  componentWillUnmount() {
-    clearInterval(this.timer);
-  }
-  render() {
-    return (
-      <View style={styles.clock}>
-        <Text style={this.props.style}>
-          {this.state.localDate + ' ' + this.state.week}
-        </Text>
-        <Text style={this.props.style}>{this.state.localTime}</Text>
-      </View>
-    );
-  }
+function getClockInfo() {
+  let day = dayjs();
+  let week = _t(`common.${weeks[day.day()]}`);
+  let localDate = day.format('YYYY/MM/DD');
+  let localTime = day.format('HH:mm:ss');
+  return {week, localDate, localTime};
 }
+export default function Clock(props) {
+  const [clock, setClock] = useState({});
+  useEffect(() => {
+    setClock(getClockInfo());
+    let timer = setInterval(() => {
+      setClock(getClockInfo());
+    }, 1000);
+    return () => clearInterval(timer);
+  }, []);
+  return (
+    <View style={styles.clock}>
+      <Text style={props.style}>{clock.localDate + ' ' + clock.week}</Text>
+      <Text style={props.style}>{clock.localTime}</Text>
+    </View>
+  );
+}
+
+Clock.propTypes = {style: PropTypes.object};
+Clock.defaultProps = {style: {}};

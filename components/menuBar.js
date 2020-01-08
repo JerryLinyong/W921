@@ -42,7 +42,7 @@
  *      rightComponents={this.state.menuRightComponents}
  *    />
  */
-import React, {Component} from 'react';
+import React, {useState, useEffect} from 'react';
 import {View, Text, TouchableWithoutFeedback, StyleSheet} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import Clock from './clock';
@@ -66,76 +66,79 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
 });
+// 默认的一些组件
+const defaultComponents = {
+  view: {component: View},
+  clock: {
+    component: Clock,
+    style: {fontSize: setSpText(40)},
+  },
+  title: {component: Title},
+  text: {component: Text},
+  icon: {
+    component: Icon,
+    style: {marginLeft: scaleSizeW(10)},
+    params: {size: setSpText(70)},
+  },
+};
 
-export default class MenuBar extends Component {
-  static propTypes = {
-    style: PropTypes.object,
-    leftComponents: PropTypes.array,
-    centerComponents: PropTypes.array,
-    rightComponents: PropTypes.array,
-  };
-  static defaultProps = {
-    style: {},
-    leftComponents: [],
-    centerComponents: [],
-    rightComponents: [],
-  };
-  constructor(props) {
-    super(props);
-    this.defaultComponents = {
-      view: {component: View},
-      clock: {
-        component: Clock,
-        style: {fontSize: setSpText(40)},
-      },
-      title: {component: Title},
-      text: {component: Text},
-      icon: {
-        component: Icon,
-        style: {marginLeft: scaleSizeW(10)},
-        params: {size: setSpText(70)},
-      },
-    };
-    this.state = {};
-  }
-  // 渲染自定义组件
-  renderDom(components = []) {
-    return components.map((component, index) => {
-      let defaultComponent = this.defaultComponents[component.type];
-      let Dom;
-      if (component.type === 'customised') {
-        Dom = component.component;
-      } else {
-        Dom = defaultComponent.component;
-      }
-      const params = Object.assign(
-        {},
-        defaultComponent.params,
-        component.params,
-      );
-      const style = Object.assign({}, defaultComponent.style, component.style);
-      return (
-        <TouchableWithoutFeedback key={index} onPress={component.onPress}>
-          <Dom {...params} style={style}>
-            {params.text}
-          </Dom>
-        </TouchableWithoutFeedback>
-      );
-    });
-  }
-  render() {
+// 渲染自定义组件
+function renderDom(components = []) {
+  return components.map((component, index) => {
+    let defaultComponent = defaultComponents[component.type];
+    let Dom;
+    if (component.type === 'customised') {
+      Dom = component.component;
+    } else {
+      Dom = defaultComponent.component;
+    }
+    const params = Object.assign({}, defaultComponent.params, component.params);
+    const style = Object.assign({}, defaultComponent.style, component.style);
     return (
-      <View style={[styles.header, this.props.style]}>
-        <View style={styles.left}>
-          {this.renderDom(this.props.leftComponents)}
-        </View>
-        <View style={styles.center}>
-          {this.renderDom(this.props.centerComponents)}
-        </View>
-        <View style={styles.right}>
-          {this.renderDom(this.props.rightComponents)}
-        </View>
-      </View>
+      <TouchableWithoutFeedback key={index} onPress={component.onPress}>
+        <Dom {...params} style={style}>
+          {params.text}
+        </Dom>
+      </TouchableWithoutFeedback>
     );
-  }
+  });
 }
+export default function MenuBar(props) {
+  // 左侧内容
+  const [LeftDom, setLeftDom] = useState();
+  useEffect(() => {
+    const LeftDom = renderDom(props.leftComponents);
+    setLeftDom(LeftDom);
+  }, [props.leftComponents]);
+  // 中间内容
+  const [CenterDom, setCenterDom] = useState();
+  useEffect(() => {
+    const CenterDom = renderDom(props.centerComponents);
+    setCenterDom(CenterDom);
+  }, [props.centerComponents]);
+  // 右侧内容
+  const [RightDom, setRightDom] = useState();
+  useEffect(() => {
+    const RightDom = renderDom(props.rightComponents);
+    setRightDom(RightDom);
+  }, [props.rightComponents]);
+  return (
+    <View style={[styles.header, props.style]}>
+      <View style={styles.left}>{LeftDom}</View>
+      <View style={styles.center}>{CenterDom}</View>
+      <View style={styles.right}>{RightDom}</View>
+    </View>
+  );
+}
+MenuBar.propTypes = {
+  style: PropTypes.object,
+  leftComponents: PropTypes.array,
+  centerComponents: PropTypes.array,
+  rightComponents: PropTypes.array,
+};
+MenuBar.defaultProps = {
+  style: {},
+  leftComponents: [],
+  centerComponents: [],
+  rightComponents: [],
+};
