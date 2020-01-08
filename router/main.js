@@ -1,26 +1,24 @@
 // app主页面,根据不同的用户生成
-import React from 'react';
+import React, {useState, useEffect} from 'react';
+import {View} from 'react-native';
 import {createAppContainer} from 'react-navigation';
 import {createMaterialTopTabNavigator} from 'react-navigation-tabs';
 import {connect} from 'react-redux';
 import getPages from './utils/getPages';
 
-class MainTabNavigator extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
-  render() {
-    const primaryColor = this.props.theme.get('primary');
+function MainTabNavigator(props) {
+  // ====== 加载的页面 ====== //
+  // 根据不同的app加载不同的页面
+  const [MainPages, setMainPages] = useState(<View />);
+  useEffect(() => {
     // ====== 样式 ====== //
+    const primaryColor = props.theme.get('primary');
     // 选项卡是否可见
     let tabBarStyle = {display: 'none'};
-    if (this.props.showTabBar) {
+    if (props.showTabBar) {
       delete tabBarStyle.display;
     }
-    // ====== 加载的页面 ====== //
-    // 根据不同的app加载不同的页面
-    let pages = getPages(this.props.app, this.props.pages);
+    let pages = getPages(props.app, props.pages);
     // 创建tabs
     const MainTabNavigator = createAppContainer(
       // createMaterialTopTabNavigator提供更多的功能
@@ -46,8 +44,9 @@ class MainTabNavigator extends React.Component {
         },
       }),
     );
-    return <MainTabNavigator />;
-  }
+    setMainPages(<MainTabNavigator />);
+  }, [props.theme, props.app, props.pages, props.showTabBar]);
+  return MainPages;
 }
 
 const mapStateToProps = (state, ownProps) => {

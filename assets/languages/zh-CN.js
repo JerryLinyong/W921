@@ -8,5 +8,6 @@ export default {
     Thurs: '星期四',
     Fri: '星期五',
     Sat: '星期六',
+    real_time_operation: '实时操作',
   },
 };

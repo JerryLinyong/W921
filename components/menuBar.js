@@ -37,7 +37,7 @@
  *    }
  *    <MenuBar
  *      style={this.state.menuStyle}
- *      centerComponents={this.state.menuCenterComponents}
+ *      leftComponents={this.state.menuLeftComponents}
  *      centerComponents={this.state.menuCenterComponents}
  *      rightComponents={this.state.menuRightComponents}
  *    />

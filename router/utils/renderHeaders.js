@@ -10,12 +10,15 @@
 // methods
 // events
 //   onHeaderClick // 当路由头部右侧图标按钮被点击,触发页面的onHeaderClick方法,并且传递点击图标的id
-import React from 'react';
+import React, {useRef, useState, useEffect} from 'react';
 import {View, Text, StatusBar, StyleSheet} from 'react-native';
 import {connect} from 'react-redux';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import getStoreProps from './getStoreProps';
 const styles = StyleSheet.create({
+  body: {
+    height: '100%',
+  },
   header: {
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -43,58 +46,53 @@ function renderHeader(Dom) {
   );
   // 获取自定义的仓库值和动作
   const {mapStateToProps, mapDispatchToProps} = getStoreProps(Dom);
-  class DomWithHeader extends React.Component {
-    constructor(props) {
-      super(props);
-      this.mainDomRef = React.createRef();
-    }
-    goBack() {
-      this.props.navigation.goBack();
-    }
+  function DomWithHeader(props) {
+    const mainDomRef = useRef();
     // 点击头部图标,触发实例的onHeaderClick方法,传递突变名称
-    onHeaderClick(type) {
+    function onHeaderClick(type) {
       if (
-        this.mainDomRef.current &&
-        typeof this.mainDomRef.current.onHeaderClick === 'function'
+        mainDomRef.current &&
+        typeof mainDomRef.current.onHeaderClick === 'function'
       ) {
-        this.mainDomRef.current.onHeaderClick(type);
+        mainDomRef.current.onHeaderClick(type);
       }
     }
-    render() {
-      const primaryColor = this.props.theme.get('primary');
-      return (
-        <View style={{height: '100%'}}>
-          <View style={[styles.header, {backgroundColor: primaryColor}]}>
-            <StatusBar backgroundColor={primaryColor} />
-            {headerOptions.backable ? (
+    const [primaryColor, setPrimaryColor] = useState();
+    useEffect(() => {
+      setPrimaryColor(props.theme.get('primary'));
+    }, [props.theme]);
+    return (
+      <View style={styles.body}>
+        <View style={[styles.header, {backgroundColor: primaryColor}]}>
+          <StatusBar backgroundColor={primaryColor} />
+          {headerOptions.backable ? (
+            <Icon
+              name="arrow-left"
+              style={styles.icon}
+              onPress={() => props.navigation.goBack()}
+            />
+          ) : null}
+          <Text>{headerOptions.title}</Text>
+          <View>
+            {headerOptions.buttons.map(button => (
               <Icon
-                name="arrow-left"
+                name={button.icon}
                 style={styles.icon}
-                onPress={this.goBack.bind(this)}
+                onPress={() => onHeaderClick(button.name)}
+              />
+            ))}
+            {headerOptions.checkable ? (
+              <Icon
+                name="check"
+                style={styles.icon}
+                onPress={() => onHeaderClick('check')}
               />
             ) : null}
-            <Text>{headerOptions.title}</Text>
-            <View>
-              {headerOptions.buttons.map(button => (
-                <Icon
-                  name={button.icon}
-                  style={styles.icon}
-                  onPress={this.onHeaderClick.bind(this, button.name)}
-                />
-              ))}
-              {headerOptions.checkable ? (
-                <Icon
-                  name="check"
-                  style={styles.icon}
-                  onPress={this.onHeaderClick.bind(this, 'check')}
-                />
-              ) : null}
-            </View>
           </View>
-          <Dom ref={this.mainDomRef} {...this.props}></Dom>
         </View>
-      );
-    }
+        <Dom ref={mainDomRef} {...props}></Dom>
+      </View>
+    );
   }
   return connect(mapStateToProps, mapDispatchToProps)(DomWithHeader);
 }
