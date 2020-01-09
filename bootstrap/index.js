@@ -4,6 +4,14 @@ import logger from './logger';
 import './authority';
 import {reactH, reactW, reactT, onePx} from '../utils/screen';
 import PropTypes from 'prop-types'; // ES6
+import Ajv from 'ajv';
+import http from '@utils/http';
+
+// http请求
+global._http = http;
+
+// 验证
+global._ajv = new Ajv();
 
 // 全局的通用函数
 

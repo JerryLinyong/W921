@@ -3,11 +3,9 @@
 */
 
 import axios from 'axios';
-import Ajv from 'ajv';
 
 // url 验证
-const ajv = new Ajv();
-const validateUrl = ajv.compile({format: 'url'});
+const validateUrl = _ajv.compile({format: 'url'});
 
 // 根据状态,返回不同的文字
 const ApiResponseStatus = {

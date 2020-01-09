@@ -7,7 +7,7 @@
 import {take, call, put} from 'redux-saga/effects';
 import * as actions from '@store/pages/actionTypes';
 import {loadPagesSuccess} from '@store/pages/actions';
-import {loadPages} from '@apis/pages';
+import {loadPages, v_loadPages} from '@apis/pages';
 
 export default function* areasWorkflow() {
   while (true) {
@@ -22,6 +22,11 @@ export default function* areasWorkflow() {
     if (type === actions.LOAD_PAGES) {
       try {
         const {payload, message} = yield loadPages();
+        const isValid = v_loadPages(payload);
+        if (!isValid) {
+           // 打印出请求参数
+          _logger.error('加载所有页面请求返回数据错误:params=');
+        }
         // 数据名称转换
         const newPages = {
           showTabBar: payload.showTabBar,

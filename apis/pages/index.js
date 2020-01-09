@@ -1,7 +1,11 @@
-import http from '@utils/http';
+// 加载页面信息
 export function loadPages() {
-  return http({
+  return _http({
     url: '/my/profile',
     method: 'get',
   });
 }
+export const v_loadPages = _ajv.compile({
+  type: 'object',
+  properties: {mainmenu: {type: 'array'}},
+});
