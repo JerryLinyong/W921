@@ -50,10 +50,6 @@
 
 - https://www.npmjs.com/package/immutable
 
-4. reselect(根据传入的参数变化才会重新计算,减少计算和由于数据变化产生的页面重新渲染)
-
-- https://www.npmjs.com/package/reselect
-
 5. redux-persist(自动永久的保存 store 数据到本地)
 
 - https://www.npmjs.com/package/redux-persist
