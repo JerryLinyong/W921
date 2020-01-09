@@ -2,7 +2,7 @@
 import i18n from './language';
 import logger from './logger';
 import './authority';
-import {scaleSizeH, scaleSizeW, setSpText} from '../utils/screen';
+import {scaleSizeH, scaleSizeW, setSpText, onePx} from '../utils/screen';
 import PropTypes from 'prop-types'; // ES6
 import {isEmpty} from 'xe-utils';
 
@@ -16,6 +16,7 @@ global.PropTypes = PropTypes;
 global.scaleSizeH = scaleSizeH;
 global.scaleSizeW = scaleSizeW;
 global.setSpText = setSpText;
+global.onePx = onePx;
 
 // 定义全局的语言转换函数,必须用函数的形式,否则会报错 实例:_t('home.test') = 测试
 global._t = text => i18n.t(text);

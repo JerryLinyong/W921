@@ -1,7 +1,7 @@
 import React, {useRef, useState, useEffect} from 'react';
 import {Text, View, StyleSheet} from 'react-native';
 import MenuBar from '@components/menuBar';
-// import MessageList from './components/messageList';
+import MessageList from './components/messageList';
 
 const styles = StyleSheet.create({
   main: {flexDirection: 'row'},
@@ -110,7 +110,7 @@ export default function HomeScreen(props) {
         </View>
         <View style={styles.msgBox}>
           <MenuBar {...msgMenu} />
-          {/* <MessageList /> */}
+          <MessageList />
         </View>
       </View>
     </View>

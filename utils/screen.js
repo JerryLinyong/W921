@@ -65,3 +65,8 @@ export function scaleSizeW(size: Number) {
   size = Math.round(scaleWidth / pixelRatio + 0.5);
   return size;
 }
+
+/**
+ * 1像素
+ */
+export const onePx = 1 / pixelRatio;

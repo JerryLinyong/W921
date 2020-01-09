@@ -6,16 +6,12 @@ import {
   FlatList,
   TouchableWithoutFeedback,
 } from 'react-native';
-import {Button} from '@ant-design/react-native';
+import Button from '@components/button';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {scaleSizeW} from '../../../../utils/screen';
 
 const styles = StyleSheet.create({
-  button: {
-    height: scaleSizeH(80),
-    marginHorizontal: scaleSizeW(20),
-    marginTop: scaleSizeH(30),
-  },
+  button: {},
   buttonText: {fontSize: setSpText(30), flex: 1},
 });
 
@@ -59,11 +55,11 @@ function Message(props) {
           style={{
             height: scaleSizeH(50),
             width: scaleSizeW(30),
-            backgroundColor: this.props.color,
+            backgroundColor: props.color,
             borderRadius: 10,
             justifyContent: 'center',
           }}>
-          <Text style={styles.tag}>{this.props.callType} </Text>
+          <Text style={styles.tag}>{props.callType} </Text>
         </View>
       </View>
     </TouchableWithoutFeedback>
@@ -73,7 +69,7 @@ function Message(props) {
 export default function Operations(props) {
   return (
     <View>
-      <FlatList
+      {/* <FlatList
         data={this.props.data}
         keyExtractor={(item, index) => item.id + ''}
         showsVerticalScrollIndicator={false}
@@ -97,15 +93,11 @@ export default function Operations(props) {
             }
           />
         )}
-      />
-      <Button style={styles.button}>
-        <Icon name="check" color="gray" size={setSpText(40)} />
-        <Text style={styles.buttonText}>gahga</Text>
-      </Button>
-      <Button style={styles.button}>
-        <Icon name="cancel" color="gray" size={setSpText(40)} />
-        <Text style={styles.buttonText}>gahga</Text>
-      </Button>
+      /> */}
+      <Button>gahga</Button>
+      <Button>gahga</Button>
+      <Button>gahga</Button>
+      <Button>gahga</Button>
     </View>
   );
 }
