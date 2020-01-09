@@ -9,12 +9,11 @@ let initPages = fromJS({
 });
 // 默认的页面参数
 let defaultPage = {
-  view: '', // 页面id.如 Home
+  name: '', // 页面id.如 Home
   params: {}, // 页面 props
   icon: '', // 页面对应的icon
   label: '', // 页面对应的label
 };
-
 export default handleActions(
   {
     // ================== 成功 ========================================== //

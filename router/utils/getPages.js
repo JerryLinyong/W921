@@ -18,66 +18,26 @@ import VoerkaMsgSettingsPage from '@voerkaMsg/settings';
 import ErrorPage from '@pages/error';
 // ================== 通用 ========================= //
 const commonPages = {
-  Error: {screen: ErrorPage, label: '错误', icon: 'close'}, // 错误页面
+  Error: ErrorPage, // 错误页面
 };
 
 // 页面可以自定义的只有页面顺序和图标和名称
 // ================== W921 ========================= //
 const w921Pages = {
-  Home: {
-    screen: W921HomePage,
-    label: '主页',
-    icon: 'home',
-  },
-  Message: {
-    screen: W921MessagePage,
-    label: '消息',
-    icon: 'email',
-  },
-  Statistics: {
-    screen: W921StatisticsPage,
-    label: '统计',
-    icon: 'chart-pie',
-  },
-  Map: {
-    screen: W921MapPage,
-    label: '地图',
-    icon: 'map',
-  },
-  Settings: {
-    screen: W921SettingsPage,
-    label: '设置',
-    icon: 'settings-outline',
-  },
+  Home: W921HomePage,
+  Message: W921MessagePage,
+  Statistics: W921StatisticsPage,
+  Map: W921MapPage,
+  Settings: W921SettingsPage,
 };
 
 // ================== voerka消息页面 ========================= //
 const voerkaMsgPages = {
-  Home: {
-    screen: VoerkaMsgHomePage,
-    label: '主页',
-    icon: 'home',
-  },
-  Message: {
-    screen: VoerkaMsgMessagePage,
-    label: '消息',
-    icon: 'email',
-  },
-  Statistics: {
-    screen: VoerkaMsgStatisticsPage,
-    label: '统计',
-    icon: 'chart-pie',
-  },
-  Map: {
-    screen: VoerkaMsgMapPage,
-    label: '地图',
-    icon: 'map',
-  },
-  Settings: {
-    screen: VoerkaMsgSettingsPage,
-    label: '设置',
-    icon: 'settings-outline',
-  },
+  Home: VoerkaMsgHomePage,
+  Message: VoerkaMsgMessagePage,
+  Statistics: VoerkaMsgStatisticsPage,
+  Map: VoerkaMsgMapPage,
+  Settings: VoerkaMsgSettingsPage,
 };
 
 // 所有的主页面
@@ -90,19 +50,9 @@ export default function getPages(app, pages) {
   let navPages = {};
   let mainPages = allMainPages[app];
   pages.forEach(page => {
-    let defaultPage = mainPages[page.view] || commonPages.Error;
-    navPages[page.view] = {
-      screen: renderMain(defaultPage.screen, page.params),
-      navigationOptions: {
-        tabBarLabel: page.label || defaultPage.label,
-        tabBarIcon: ({tintColor}) => (
-          <Icon
-            name={page.icon || defaultPage.icon}
-            color={tintColor}
-            size={setSpText(60)}
-          />
-        ),
-      },
+    let defaultPage = mainPages[page.name] || commonPages.Error;
+    navPages[page.name] = {
+      screen: renderMain(defaultPage, page.params),
     };
   });
   return navPages;

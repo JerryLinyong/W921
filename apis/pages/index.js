@@ -6,11 +6,11 @@ export function loadPages() {
       status: 'success',
       payload: {
         pages: [
-          {view: 'Home'},
-          {view: 'Message'},
-          {view: 'Statistics'},
-          {view: 'gagaga'}, // 当页面不存在,会显示错误页面
-          {view: 'Settings'},
+          {name: 'Home', icon: 'home', label: '主页'},
+          {name: 'Message', icon: 'email', label: '消息'},
+          {name: 'Statistics'},
+          {name: 'gagaga'}, // 当页面不存在,会显示错误页面
+          {name: 'Settings'},
         ],
       },
     };
