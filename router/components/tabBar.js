@@ -19,10 +19,10 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    paddingVertical: scaleSizeH(6),
+    paddingVertical: _reactH(6),
   },
   text: {
-    fontSize: setSpText(30),
+    fontSize: _reactT(30),
   },
 });
 
@@ -42,7 +42,7 @@ function TabBar(props) {
           <View
             style={[styles.tab, {backgroundColor: props.theme.get('basic')}]}>
             <Icon
-              size={setSpText(50)}
+              size={_reactT(50)}
               name={route.icon || 'help'}
               color={color}
             />

@@ -10,9 +10,9 @@
  * const style = StyleSheet.create({
  *   view: {
  *     flexDirection: 'row',
- *     height: scaleSizeH(500),
- *     width: scaleSizeW(750),
- *     font-size: setSpText(30)
+ *     height: _reactH(500),
+ *     width: _reactW(750),
+ *     font-size: _reactT(30)
  *   }
  * })
  */
@@ -36,7 +36,7 @@ let screenPxH = PixelRatio.getPixelSizeForLayoutSize(screenH);
  * @param size  px
  * @returns {Number} dp
  */
-export function setSpText(size: Number) {
+export function reactT(size: Number) {
   var scaleWidth = screenW / designWidth;
   var scaleHeight = screenH / designHeight;
   var scale = Math.min(scaleWidth, scaleHeight);
@@ -49,7 +49,7 @@ export function setSpText(size: Number) {
  * @param size  px
  * @returns {Number} dp
  */
-export function scaleSizeH(size: Number) {
+export function reactH(size: Number) {
   var scaleHeight = (size * screenPxH) / designHeight;
   size = Math.round(scaleHeight / pixelRatio + 0.5);
   return size;
@@ -60,7 +60,7 @@ export function scaleSizeH(size: Number) {
  * @param size  px
  * @returns {Number} dp
  */
-export function scaleSizeW(size: Number) {
+export function reactW(size: Number) {
   var scaleWidth = (size * screenPxW) / designWidth;
   size = Math.round(scaleWidth / pixelRatio + 0.5);
   return size;

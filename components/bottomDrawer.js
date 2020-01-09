@@ -26,7 +26,6 @@ import AdvancedFormat from 'dayjs/plugin/advancedFormat';
 dayjs.extend(relativeTime);
 dayjs.extend(AdvancedFormat);
 import 'dayjs/locale/zh-cn';
-import {scaleSizeH, scaleSizeW, setSpText} from '../utils/screen';
 
 const styles = StyleSheet.create({
   modalInfo: {
@@ -36,7 +35,7 @@ const styles = StyleSheet.create({
   },
   infoTypeText: {
     color: 'red',
-    fontSize: setSpText(30),
+    fontSize: _reactT(30),
     padding: 2,
     paddingHorizontal: 14,
     marginHorizontal: 8,
@@ -45,10 +44,10 @@ const styles = StyleSheet.create({
   },
   timeText: {
     color: 'white',
-    fontSize: setSpText(30),
+    fontSize: _reactT(30),
   },
   modalBox: {
-    maxHeight: scaleSizeH(300),
+    maxHeight: _reactH(300),
     marginVertical: 20,
     paddingHorizontal: 120,
   },
@@ -60,7 +59,7 @@ const styles = StyleSheet.create({
   },
   idText: {
     color: 'white',
-    fontSize: setSpText(35),
+    fontSize: _reactT(35),
   },
   modal: {
     width: '100%',
@@ -218,7 +217,7 @@ export default class BottomDrawer extends React.Component {
                       }),
                     );
                   }}>
-                  <Text style={{fontSize: setSpText(35)}}>{'确认收到'}</Text>
+                  <Text style={{fontSize: _reactT(35)}}>{'确认收到'}</Text>
                 </Button>
                 <Button
                   mode="outlined"
@@ -237,7 +236,7 @@ export default class BottomDrawer extends React.Component {
                       }),
                     );
                   }}>
-                  <Text style={{fontSize: setSpText(35)}}>{'已处理'}</Text>
+                  <Text style={{fontSize: _reactT(35)}}>{'已处理'}</Text>
                 </Button>
                 <Button
                   mode="outlined"
@@ -256,16 +255,16 @@ export default class BottomDrawer extends React.Component {
                       }),
                     );
                   }}>
-                  <Text style={{fontSize: setSpText(35)}}> {'撤销'}</Text>
+                  <Text style={{fontSize: _reactT(35)}}> {'撤销'}</Text>
                 </Button>
                 <Button
                   mode="contained"
                   color="red"
                   style={{marginBottom: 30, marginHorizontal: 40}}
                   onPress={this.onClose}>
-                  <Text style={{fontSize: setSpText(35)}}>{'取消'}</Text>
+                  <Text style={{fontSize: _reactT(35)}}>{'取消'}</Text>
                 </Button>
-                <View style={{height: scaleSizeH(40)}}></View>
+                <View style={{height: _reactH(40)}}></View>
               </View>
             ) : (
               <View style={styles.modalContent}>
@@ -280,7 +279,7 @@ export default class BottomDrawer extends React.Component {
                       key: 50,
                     });
                   }}>
-                  <Text style={{fontSize: setSpText(35)}}>{'确认收到'}</Text>
+                  <Text style={{fontSize: _reactT(35)}}>{'确认收到'}</Text>
                 </Button>
                 <Button
                   mode="outlined"
@@ -293,7 +292,7 @@ export default class BottomDrawer extends React.Component {
                       key: 10,
                     });
                   }}>
-                  <Text style={{fontSize: setSpText(35)}}>{'已处理'}</Text>
+                  <Text style={{fontSize: _reactT(35)}}>{'已处理'}</Text>
                 </Button>
                 <Button
                   mode="outlined"
@@ -306,7 +305,7 @@ export default class BottomDrawer extends React.Component {
                       key: 40,
                     });
                   }}>
-                  <Text style={{fontSize: setSpText(35)}}>{'撤销'}</Text>
+                  <Text style={{fontSize: _reactT(35)}}>{'撤销'}</Text>
                 </Button>
                 <Button
                   mode="contained"
@@ -316,9 +315,9 @@ export default class BottomDrawer extends React.Component {
                     marginHorizontal: 40,
                   }}
                   onPress={this.onClose}>
-                  <Text style={{fontSize: setSpText(35)}}>{'取消'}</Text>
+                  <Text style={{fontSize: _reactT(35)}}>{'取消'}</Text>
                 </Button>
-                <View style={{height: scaleSizeH(40)}} />
+                <View style={{height: _reactH(40)}} />
               </View>
             )}
           </Portal>

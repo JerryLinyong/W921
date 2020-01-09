@@ -32,7 +32,7 @@ const httpApiRequest = axios.create({
 const apiRequestInterceptor = [
   config => {
     // 统一更改http请求的url
-    config.url = SERVER_ADDRESS + config.url;
+    config.url = _serverAddress + config.url;
     // 验证URL
     if (validateUrl(config.url)) {
       throw new Error('url格式错误');

@@ -1,12 +1,12 @@
 /**
  * 显示单个卡片信息
  *  props
- *    cardWidth: PropTypes.number,    // 卡片宽度
- *    cardHeight: PropTypes.number,   // 卡片高度
- *    theme: PropTypes.string,        // 主题
- *    position: PropTypes.string,     // 卡片位置中间
- *    number: PropTypes.string,       // 卡片名称
- *    rightComponents: PropTypes.array, // 右侧的图标组件
+ *    cardWidth: _propTs.number,    // 卡片宽度
+ *    cardHeight: _propTs.number,   // 卡片高度
+ *    theme: _propTs.string,        // 主题
+ *    position: _propTs.string,     // 卡片位置中间
+ *    number: _propTs.string,       // 卡片名称
+ *    rightComponents: _propTs.array, // 右侧的图标组件
  *                                   [{
  *                                      params: {}, // 参数
  *                                      onIconPress: function, // 点击图标的事件
@@ -20,8 +20,8 @@
  *  实例
  *    import Card from './card'
  *   <Card
- *       cardWidth={scaleSizeW(162)}
- *       cardHeight={scaleSizeH(210)}
+ *       cardWidth={_reactW(162)}
+ *       cardHeight={_reactH(210)}
  *       position={item.zone}
  *       cardName={item.name}
  *       rightComponents={this.iconComponents}
@@ -31,34 +31,34 @@
 import React, { Component } from 'react'
 import { StyleSheet, View, Text, TouchableNativeFeedback, TouchableWithoutFeedback } from 'react-native'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import PropTypes from 'prop-types'
+import _propTs from 'prop-types'
 import Color from 'color'
 
 const styles = StyleSheet.create({
   container: {
     borderWidth: 1,
-    borderRadius: scaleSizeW(10),
+    borderRadius: _reactW(10),
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginBottom: scaleSizeW(20),
-    marginRight: scaleSizeW(20)
+    marginBottom: _reactW(20),
+    marginRight: _reactW(20)
   },
   position: {
-    fontSize: setSpText(40),
-    paddingTop: scaleSizeH(50)
+    fontSize: _reactT(40),
+    paddingTop: _reactH(50)
   },
   tools: {
     flexDirection: 'row',
     justifyContent: 'space-around',
     width: '100%',
-    borderBottomLeftRadius: scaleSizeW(10),
-    borderBottomRightRadius: scaleSizeW(10),
+    borderBottomLeftRadius: _reactW(10),
+    borderBottomRightRadius: _reactW(10),
   },
   icons: {
     alignItems: 'center',
     flexDirection: 'row',
     justifyContent: 'space-around',
-    width: scaleSizeW(102)
+    width: _reactW(102)
   }
 })
 
@@ -69,7 +69,7 @@ export default function Card(props) {
       <View style={[styles.container, { width: props.cardWidth, height: props.cardHeight, borderColor: Color(primaryColor).lighten(0.2) }]}>
         <Text style={[styles.position, { color: Color(primaryColor).lighten(0.2) }]}>{props.position}</Text>
         <View style={[styles.tools, { backgroundColor: Color(primaryColor).lighten(0.7) }]}>
-          <Text style={{ fontSize: setSpText(40), color: Color(primaryColor).lighten(0.2) }}>{props.cardName}</Text>
+          <Text style={{ fontSize: _reactT(40), color: Color(primaryColor).lighten(0.2) }}>{props.cardName}</Text>
           <View style={styles.icons}>
             {props.rightComponents.map((component, index) => {
               return (<TouchableWithoutFeedback onPress={() => component.onIconPress()} key={index} >
@@ -83,12 +83,12 @@ export default function Card(props) {
   )
 }
 Card.proptypes = {
-  cardWidth: PropTypes.number,
-  cardHeight: PropTypes.number,
-  theme: PropTypes.string,
-  position: PropTypes.string,
-  number: PropTypes.string,
-  rightComponents: PropTypes.array,
+  cardWidth: _propTs.number,
+  cardHeight: _propTs.number,
+  theme: _propTs.string,
+  position: _propTs.string,
+  number: _propTs.string,
+  rightComponents: _propTs.array,
 };
 Card.defaultProps = {
   cardWidth: 0,

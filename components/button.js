@@ -1,13 +1,13 @@
 /**
  * 通用的按钮组件,支持2s的防抖,点击2s的透明效果
  *  props
- *    style: PropTypes.object, // 设置button的外边距,宽高
- *    icon: PropTypes.string, // icon的名称
- *    color: PropTypes.string, // icon和字体的颜色
- *    size: PropTypes.number, // icon和字体的大小
- *    children: PropTypes.string, // 文本内容
- *    loading: PropTypes.boolean, // 是否在加载
- *    disabled: PropTypes.boolean, // 是否禁止
+ *    style: _propTs.object, // 设置button的外边距,宽高
+ *    icon: _propTs.string, // icon的名称
+ *    color: _propTs.string, // icon和字体的颜色
+ *    size: _propTs.number, // icon和字体的大小
+ *    children: _propTs.string, // 文本内容
+ *    loading: _propTs.boolean, // 是否在加载
+ *    disabled: _propTs.boolean, // 是否禁止
  */
 import React, {useState, useEffect} from 'react';
 import {View, Text, TouchableWithoutFeedback, StyleSheet} from 'react-native';
@@ -18,13 +18,13 @@ const styles = StyleSheet.create({
   button: {
     flexDirection: 'row',
     alignItems: 'center',
-    borderRadius: setSpText(20),
-    borderWidth: onePx,
+    borderRadius: _reactT(20),
+    borderWidth: _onePx,
     borderColor: 'grey',
-    paddingHorizontal: scaleSizeW(20),
-    paddingVertical: scaleSizeH(20),
-    marginHorizontal: scaleSizeW(20),
-    marginVertical: scaleSizeH(20),
+    paddingHorizontal: _reactW(20),
+    paddingVertical: _reactH(20),
+    marginHorizontal: _reactW(20),
+    marginVertical: _reactH(20),
     backgroundColor: '#1890ff',
   },
   text: {
@@ -69,19 +69,19 @@ export default function Button(props) {
   );
 }
 Button.propTypes = {
-  style: PropTypes.object,
-  icon: PropTypes.string,
-  color: PropTypes.string,
-  size: PropTypes.number,
-  children: PropTypes.string,
-  loading: PropTypes.bool,
-  disabled: PropTypes.bool,
+  style: _propTs.object,
+  icon: _propTs.string,
+  color: _propTs.string,
+  size: _propTs.number,
+  children: _propTs.string,
+  loading: _propTs.bool,
+  disabled: _propTs.bool,
 };
 Button.defaultProps = {
   style: {},
   icon: 'check',
   color: 'white',
-  size: setSpText(40),
+  size: _reactT(40),
   children: '',
   loading: false,
   disabled: false,

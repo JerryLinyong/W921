@@ -41,15 +41,15 @@ export default class mqttClient {
     client.connect(connectOptions);
   }
   onConnectionLost(e) {
-    logger.error('MQTT client disconnected:' + e);
+    _logger.error('MQTT client disconnected:' + e);
   }
   onMessageArrived() {
-    logger.info('MQTT client get message');
+    _logger.info('MQTT client get message');
   }
   onSuccess() {
-    logger.info('MQTT client connect success');
+    _logger.info('MQTT client connect success');
   }
   onFailure(e) {
-    logger.error('MQTT client connect fail:' + e);
+    _logger.error('MQTT client connect fail:' + e);
   }
 }

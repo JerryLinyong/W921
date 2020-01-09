@@ -3,9 +3,9 @@
  * 1.呼叫进来时，点击卡片显示（可选择卡片） type：'card'
  * 2.呼叫进来时，点击消息显示（只显示操作） type: 'message'
  * 
- * @param type :  PropTypes.string     // 'card' 或者 'message'
- * @param  callers :  PropTypes.array  //    卡片显示信息
- * @param buttonComponent :  PropTypes.array //按钮组件
+ * @param type :  _propTs.string     // 'card' 或者 'message'
+ * @param  callers :  _propTs.array  //    卡片显示信息
+ * @param buttonComponent :  _propTs.array //按钮组件
  *                              [{
  *                                  params: {}, // Button参数
  *                                  text: { style: { color: 'white' }, action: {name: '' , key: ''}} // Text样式及文本
@@ -32,7 +32,6 @@
 
 import React, { useState } from 'react'
 import { View, Text, StyleSheet, ScrollView } from 'react-native';
-import PropTypes from 'prop-types'
 import { Button, Modal, WhiteSpace, Checkbox } from '@ant-design/react-native'
 import { contains, filter } from 'ramda'
 import 'dayjs/locale/zh-cn'
@@ -40,26 +39,26 @@ import 'dayjs/locale/zh-cn'
 const styles = StyleSheet.create({
   modalInfo: {
     flexDirection: 'row',
-    padding: scaleSizeH(4),
+    padding: _reactH(4),
     justifyContent: 'space-around',
   },
   infoTypeText: {
     color: 'red',
-    fontSize: setSpText(30),
-    padding: scaleSizeH(2),
-    paddingHorizontal: scaleSizeH(14),
-    marginHorizontal: scaleSizeH(8),
+    fontSize: _reactT(30),
+    padding: _reactH(2),
+    paddingHorizontal: _reactH(14),
+    marginHorizontal: _reactH(8),
     backgroundColor: 'white',
-    borderRadius: scaleSizeH(4)
+    borderRadius: _reactH(4)
   },
   timeText: {
     color: 'white',
-    fontSize: setSpText(30),
+    fontSize: _reactT(30),
   },
   modalBox: {
-    maxHeight: scaleSizeH(300),
-    marginVertical: scaleSizeH(20),
-    paddingHorizontal: scaleSizeH(120),
+    maxHeight: _reactH(300),
+    marginVertical: _reactH(20),
+    paddingHorizontal: _reactH(120),
   },
   modalBoxContainer: {
     flexDirection: 'row',
@@ -68,14 +67,14 @@ const styles = StyleSheet.create({
     marginHorizontal: '15%'
   },
   infoBox: {
-    borderRadius: scaleSizeH(10),
-    marginVertical: scaleSizeH(10),
+    borderRadius: _reactH(10),
+    marginVertical: _reactH(10),
     overflow: 'hidden',
     flex: 1,
   },
   idText: {
     color: 'white',
-    fontSize: setSpText(35),
+    fontSize: _reactT(35),
   }
 })
 
@@ -153,7 +152,7 @@ export default function BottomDrawer(props) {
                 <Text style={styles.infoTypeText}>{callService.keyMap[callService.key].name}</Text>
               </View>
             </View>
-            <View style={{ position: 'absolute', right: -scaleSizeH(80) }}>
+            <View style={{ position: 'absolute', right: -_reactH(80) }}>
               <Checkbox
                 checked={contains(callService.callerSN)(choosenCallers)}
                 onChange={() => {chooseCallers(callService.callerSN) }}
@@ -183,9 +182,9 @@ export default function BottomDrawer(props) {
 
 // export default class BottomDrawer extends React.Component {
 //   static proptypes = {
-//     type: PropTypes.string,
-//     callers: PropTypes.array,
-//     buttonComponent: PropTypes.array
+//     type: _propTs.string,
+//     callers: _propTs.array,
+//     buttonComponent: _propTs.array
 //   }
 //   static defaultProps = {
 //     type: '',
@@ -274,7 +273,7 @@ export default function BottomDrawer(props) {
 //                 <Text style={styles.infoTypeText}>{callService.keyMap[callService.key].name}</Text>
 //               </View>
 //             </View>
-//             <View style={{ position: 'absolute', right: -scaleSizeH(80) }}>
+//             <View style={{ position: 'absolute', right: -_reactH(80) }}>
 //               <Checkbox
 //                 checked={contains(callService.callerSN)(this.state.choosenCallers)}
 //                 onChange={() => { this.chooseCallers(callService.callerSN) }}

@@ -5,12 +5,11 @@ import React, { Component } from 'react'
 import { StyleSheet, View, Text, TouchableNativeFeedback, FlatList, Dimensions, TouchableWithoutFeedback, DeviceEventEmitter } from 'react-native'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import Color from 'color'
-// import { scaleSizeH, scaleSizeW, setSpText } from '../../../utils/screen'
 // import BottomDrawer from '../../../components/bottomDrawer'
 const styles = StyleSheet.create({
   container: {
-    width: scaleSizeW(162),
-    height: scaleSizeH(210),
+    width: _reactW(162),
+    height: _reactH(210),
     borderWidth: 1,
     borderColor: Color('rgb(74,125,200)').lighten(0.2),
     borderRadius: 10,
@@ -20,8 +19,8 @@ const styles = StyleSheet.create({
     marginRight: 35
   },
   cardName: {
-    fontSize: setSpText(40),
-    paddingTop: scaleSizeH(50),
+    fontSize: _reactT(40),
+    paddingTop: _reactH(50),
     color: Color('rgb(74,125,200)').lighten(0.2)
   },
   tools: {
@@ -35,7 +34,7 @@ const styles = StyleSheet.create({
   icons: {
     flexDirection: 'row',
     justifyContent: 'space-around',
-    width: scaleSizeW(102)
+    width: _reactW(102)
   }
 })
 export class Card extends Component {
@@ -45,7 +44,7 @@ export class Card extends Component {
         <View style={styles.container}>
           <Text style={styles.cardName}>{this.props.zone}</Text>
           <View style={styles.tools}>
-            <Text style={{ fontSize: setSpText(40), color: Color('rgb(74,125,200)').lighten(0.2) }}>{this.props.cardName}</Text>
+            <Text style={{ fontSize: _reactT(40), color: Color('rgb(74,125,200)').lighten(0.2) }}>{this.props.cardName}</Text>
             <View style={styles.icons}>
               <Icon name="phone-classic" color='white' size={30} />
               <Icon name="camcorder" color='white' size={30} />
@@ -87,7 +86,7 @@ export class CardListWithoutData extends Component {
   }
   render() {
     return (
-      <View style={{ borderRightWidth: 1, height: scaleSizeH(1070), borderRightColor: '#00BFFF', paddingHorizontal: 20, paddingVertical: 10 }}>
+      <View style={{ borderRightWidth: 1, height: _reactH(1070), borderRightColor: '#00BFFF', paddingHorizontal: 20, paddingVertical: 10 }}>
         <FlatList
           // data={this.props.homeDefaultViewStyle === 'default' ? this.state.cards.slice(0, this.state.selectedNum) : this.state.cards}
           key={this.props.num}

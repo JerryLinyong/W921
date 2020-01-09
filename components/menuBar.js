@@ -1,11 +1,11 @@
 /**
  * 显示页面头部信息
  *  props
- *    theme: PropTypes.string, // 主题
- *    title: PropTypes.string, // 左侧的主要标题
- *    subTitle: PropTypes.string, // 左侧的次要标题
- *    centerComponents: PropTypes.array, // 中间的自定义组件
- *    rightComponents: PropTypes.array, // 右侧的自定义组件
+ *    theme: _propTs.string, // 主题
+ *    title: _propTs.string, // 左侧的主要标题
+ *    subTitle: _propTs.string, // 左侧的次要标题
+ *    centerComponents: _propTs.array, // 中间的自定义组件
+ *    rightComponents: _propTs.array, // 右侧的自定义组件
  *                                   [{
  *                                      type: "", // header里面定义的一些通用的组件,如timer时间显示器,或则customised自定义
  *                                      params: {}, // 参数
@@ -53,8 +53,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    height: scaleSizeH(130),
-    padding: scaleSizeH(40),
+    height: _reactH(130),
+    padding: _reactH(40),
   },
   left: {
     flexDirection: 'row',
@@ -71,14 +71,14 @@ const defaultComponents = {
   view: {component: View},
   clock: {
     component: Clock,
-    style: {fontSize: setSpText(40)},
+    style: {fontSize: _reactT(40)},
   },
   title: {component: Title},
   text: {component: Text},
   icon: {
     component: Icon,
-    style: {marginLeft: scaleSizeW(10)},
-    params: {size: setSpText(70)},
+    style: {marginLeft: _reactW(10)},
+    params: {size: _reactT(70)},
   },
 };
 
@@ -131,10 +131,10 @@ export default function MenuBar(props) {
   );
 }
 MenuBar.propTypes = {
-  style: PropTypes.object,
-  leftComponents: PropTypes.array,
-  centerComponents: PropTypes.array,
-  rightComponents: PropTypes.array,
+  style: _propTs.object,
+  leftComponents: _propTs.array,
+  centerComponents: _propTs.array,
+  rightComponents: _propTs.array,
 };
 MenuBar.defaultProps = {
   style: {},

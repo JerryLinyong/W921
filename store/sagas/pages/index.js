@@ -31,7 +31,7 @@ export default function* areasWorkflow() {
         callBack({status: 'success', message});
       } catch (message) {
         // 在这里打印异步请求的错误,让后台可以看见
-        logger.error('加载所有页面失败:' + message);
+        _logger.error('加载所有页面失败:' + message);
         callBack({status: 'fail', message});
       }
     }

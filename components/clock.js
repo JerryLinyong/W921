@@ -37,5 +37,5 @@ export default function Clock(props) {
   );
 }
 
-Clock.propTypes = {style: PropTypes.object};
+Clock.propTypes = {style: _propTs.object};
 Clock.defaultProps = {style: {}};

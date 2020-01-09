@@ -11,10 +11,10 @@ import {StyleSheet} from 'react-native';
 
 const styles = StyleSheet.create({
   title: {
-    fontSize: setSpText(50),
+    fontSize: _reactT(50),
   },
   subTitle: {
-    fontSize: setSpText(36),
+    fontSize: _reactT(36),
   },
 });
 
@@ -38,9 +38,9 @@ export default function Title(props) {
   );
 }
 Title.propTypes = {
-  style: PropTypes.object,
-  title: PropTypes.string,
-  subTitle: PropTypes.string,
+  style: _propTs.object,
+  title: _propTs.string,
+  subTitle: _propTs.string,
 };
 Title.defaultProps = {
   style: {},

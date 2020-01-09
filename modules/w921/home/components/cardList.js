@@ -6,12 +6,11 @@ import { StyleSheet, View, Text, TouchableNativeFeedback, FlatList, Dimensions, 
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import Color from 'color'
 import Card from './card'
-// import { scaleSizeH, scaleSizeW, setSpText } from '../../../utils/screen'
 // import BottomDrawer from '../../../components/bottomDrawer'
 const styles = StyleSheet.create({
   container: {
-    width: scaleSizeW(162),
-    height: scaleSizeH(210),
+    width: _reactW(162),
+    height: _reactH(210),
     borderWidth: 1,
     borderColor: Color('rgb(74,125,200)').lighten(0.2),
     borderRadius: 10,
@@ -21,8 +20,8 @@ const styles = StyleSheet.create({
     marginRight: 35
   },
   cardName: {
-    fontSize: setSpText(40),
-    paddingTop: scaleSizeH(50),
+    fontSize: _reactT(40),
+    paddingTop: _reactH(50),
     color: Color('rgb(74,125,200)').lighten(0.2)
   },
   tools: {
@@ -36,7 +35,7 @@ const styles = StyleSheet.create({
   icons: {
     flexDirection: 'row',
     justifyContent: 'space-around',
-    width: scaleSizeW(102)
+    width: _reactW(102)
   }
 })
 
@@ -44,7 +43,7 @@ export class CardListWithoutData extends Component {
   constructor(props) {
     super(props)
     this.iconComponents=['phone-classic','camcorder', 'alarm-light', 'lock-outline'].map((name) => {
-      return {params: {name: name,  size: setSpText(50) },  onIconPress: () => {console.log(name)}}
+      return {params: {name: name,  size: _reactT(50) },  onIconPress: () => {console.log(name)}}
     })
     this.state = {
       cards: [
@@ -67,7 +66,7 @@ export class CardListWithoutData extends Component {
   }
   render() {
     return (
-      <View style={{ borderRightWidth: 1, height: scaleSizeH(1070), borderRightColor: '#00BFFF', paddingHorizontal: 20, paddingVertical: 10 }}>
+      <View style={{ borderRightWidth: 1, height: _reactH(1070), borderRightColor: '#00BFFF', paddingHorizontal: 20, paddingVertical: 10 }}>
         <FlatList
           // data={this.props.homeDefaultViewStyle === 'default' ? this.state.cards.slice(0, this.state.selectedNum) : this.state.cards}
           key={this.props.num}
@@ -84,8 +83,8 @@ export class CardListWithoutData extends Component {
           ListFooterComponent={<View style={{ height: 60 }}></View>}
           renderItem={({ item }) =>
             <Card
-              cardWidth={scaleSizeW(162)}
-              cardHeight={scaleSizeH(210)}
+              cardWidth={_reactW(162)}
+              cardHeight={_reactH(210)}
               position={item.zone}
               cardName={item.name}
               rightComponents={this.iconComponents}

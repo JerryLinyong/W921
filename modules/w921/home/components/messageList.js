@@ -12,8 +12,8 @@ const Step = Steps.Step;
 
 const styles = StyleSheet.create({
   messageList: {
-    marginHorizontal: scaleSizeW(10),
-    marginVertical: scaleSizeH(10),
+    marginHorizontal: _reactW(10),
+    marginVertical: _reactH(10),
     backgroundColor: 'blue',
   },
   messageItem: {
@@ -24,17 +24,17 @@ const styles = StyleSheet.create({
   },
   messageText: {
     flex: 1,
-    fontSize: setSpText(30),
+    fontSize: _reactT(30),
   },
   tagItem: {
-    height: scaleSizeH(50),
-    width: scaleSizeW(30),
-    borderRadius: setSpText(10),
+    height: _reactH(50),
+    width: _reactW(30),
+    borderRadius: _reactT(10),
     justifyContent: 'center',
   },
   tagText: {
     fontWeight: 'bold',
-    fontSize: setSpText(25),
+    fontSize: _reactT(25),
     textAlign: 'center',
   },
 });
@@ -157,7 +157,7 @@ export default function Operations(props) {
         onEndReachedThreshold="0.4"
         style={styles.messageList}
         // onEndReached={() => this.loadMore()}
-        ListFooterComponent={<View style={{height: scaleSizeH(60)}}></View>}
+        ListFooterComponent={<View style={{height: _reactH(60)}}></View>}
         renderItem={({item}) => (
           <Message
             name={item.name}

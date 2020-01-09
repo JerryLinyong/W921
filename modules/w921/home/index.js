@@ -46,19 +46,19 @@ function getCardMenu(props) {
   return {
     style: {
       backgroundColor,
-      height: scaleSizeH(100),
+      height: _reactH(100),
     },
     leftComponents: [
       {
         type: 'title',
         params: {title: props.myTitle},
-        style: {color, fontSize: setSpText(40)},
+        style: {color, fontSize: _reactT(40)},
       },
     ],
     rightComponents: ['border-all-variant', 'view-grid', 'apps'].map(name => {
       return {
         type: 'icon',
-        params: {name, color: props.theme.get('primary'), size: setSpText(50)},
+        params: {name, color: props.theme.get('primary'), size: _reactT(50)},
         onPress: () => {
           console.log(name);
         },
@@ -74,13 +74,13 @@ function getMsgdMenu(props) {
   return {
     style: {
       backgroundColor,
-      height: scaleSizeH(100),
+      height: _reactH(100),
     },
     leftComponents: [
       {
         type: 'title',
         params: {title: _t('common.real_time_operation')},
-        style: {color, fontSize: setSpText(40)},
+        style: {color, fontSize: _reactT(40)},
       },
     ],
   };
