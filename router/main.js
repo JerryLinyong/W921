@@ -12,7 +12,7 @@ function MainTabNavigator(props) {
   // 根据不同的app加载不同的页面
   const [MainPages, setMainPages] = useState(<View />);
   useEffect(() => {
-    let pages = getPages(props.app, props.pages);
+    let pages = getPages(props.app, props.pages.toJS());
     // 创建tabs
     const MainTabNavigator = createAppContainer(
       // createMaterialTopTabNavigator提供更多的功能
@@ -33,7 +33,7 @@ function MainTabNavigator(props) {
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    pages: state.pages.get('pages').toJS(), // 加载的页面
+    pages: state.pages.get('pages'), // 加载的页面
     app: state.my.get('app'), // app的类型
   };
 };

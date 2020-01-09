@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
 function TabBar(props) {
   const [routes, setRoutes] = useState([]);
   useEffect(() => {
-    const routes = props.pages.map((route, index) => {
+    const routes = props.pages.toJS().map((route, index) => {
       const color =
         props.navigationState.index === index
           ? props.theme.get('primary')
@@ -42,7 +42,7 @@ function TabBar(props) {
             style={[styles.tab, {backgroundColor: props.theme.get('basic')}]}>
             <Icon
               size={setSpText(50)}
-              name={route.icon || 'close'}
+              name={route.icon || 'help'}
               color={color}
             />
             {route.label ? (
@@ -59,7 +59,7 @@ function TabBar(props) {
 const mapStateToProps = (state, ownProps) => {
   return {
     theme: state.theme,
-    pages: state.pages.get('pages').toJS(),
+    pages: state.pages.get('pages'),
   };
 };
 const mapDispatchToProps = (dispatch, ownProps) => {
