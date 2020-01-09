@@ -17,16 +17,21 @@ export default function* areasWorkflow() {
       actions.REMOVE_PAGE,
       actions.UPDATE_PAGE,
     ]);
-    const {params, callBack = () => {}} = action.payload;
+    const {callBack = () => {}} = action.payload;
     const type = action.type;
     if (type === actions.LOAD_PAGES) {
       try {
-        const {payload, status} = yield loadPages(params);
-        yield put(loadPagesSuccess(payload));
-        callBack({payload, status});
-      } catch (e) {
-        const message = '加载所有页面失败:' + e;
-        logger.error(message);
+        const {payload, message} = yield loadPages();
+        // 数据名称转换
+        const newPages = {
+          showTabBar: payload.showTabBar,
+          pages: payload.mainmenu,
+        };
+        yield put(loadPagesSuccess(newPages));
+        callBack({status: 'success', message});
+      } catch (message) {
+        // 在这里打印异步请求的错误,让后台可以看见
+        logger.error('加载所有页面失败:' + message);
         callBack({status: 'fail', message});
       }
     }

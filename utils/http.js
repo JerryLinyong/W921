@@ -9,14 +9,10 @@ import Ajv from 'ajv';
 const ajv = new Ajv();
 const validateUrl = ajv.compile({format: 'url'});
 
-// 设置返回值状态
+// 根据状态,返回不同的文字
 const ApiResponseStatus = {
-  success: true,
-  ok: true,
-  failed: _t('failed'),
-  denied: _t('denied'),
-  error: _t('error'),
-  unauthorized: _t('unauthorized'),
+  200: _t('success'),
+  404: _t('timeout'),
 };
 
 /**
@@ -24,15 +20,7 @@ const ApiResponseStatus = {
  * 如果不成功，返回出错信息
  */
 function getApiResponseMessage(response) {
-  if (response.status && ['ok', 'success'].includes(response.status)) {
-    return true;
-  } else {
-    if (response.status && response.status in ApiResponseStatus) {
-      return response.message || ApiResponseStatus[response.status];
-    } else {
-      return _t('http.errorMsg');
-    }
-  }
+  return ApiResponseStatus[response.status];
 }
 
 // 创建 axios 实例
@@ -59,10 +47,10 @@ const apiRequestInterceptor = [
 // 返回值拦截
 const apiResponseInterceptor = [
   response => {
-    const res = response.data;
-    let apiAnswerMessage = getApiResponseMessage(res);
-    if (apiAnswerMessage === true) {
-      return res;
+    let apiAnswerMessage = getApiResponseMessage(response);
+    // 成功则返回成功的数据,不成功则抛出错误
+    if (response.status === 200) {
+      return {payload: response.data, message: apiAnswerMessage};
     } else {
       return Promise.reject(apiAnswerMessage);
     }

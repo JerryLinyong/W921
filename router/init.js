@@ -27,16 +27,15 @@ class initScreen extends React.Component {
     this.setState({loadingPage: true});
     this.props.loadPages({callBack: this.callBack.bind(this)});
   }
-  callBack(res) {
+  callBack({status, message}) {
     // 跳转到其他页面则不做处理
     if (!this.props.navigation.isFocused()) return;
-    const {payload, status, message} = res;
     // 加载页面成功,进行跳转
     this.setState({loadingPage: false});
     if (status === 'success') {
       this.props.navigation.replace('Main');
     } else {
-      Toast.fail(_t('common.failed'), 3, null, false);
+      Toast.fail(message, 3, null, false);
     }
   }
   render() {
@@ -63,10 +62,10 @@ class initScreen extends React.Component {
           onPress={() => this.props.updateMySuccess({theme: 'default'})}>
           default
         </Button>
-        <Button type="primary" onPress={() => (i18n.locale = 'en-US')}>
+        <Button type="primary" onPress={() => (_i18n.locale = 'en-US')}>
           en-US
         </Button>
-        <Button type="primary" onPress={() => (i18n.locale = 'zh-CN')}>
+        <Button type="primary" onPress={() => (_i18n.locale = 'zh-CN')}>
           zh-CN
         </Button>
       </View>

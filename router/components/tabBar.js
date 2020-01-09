@@ -29,6 +29,7 @@ const styles = StyleSheet.create({
 function TabBar(props) {
   const [routes, setRoutes] = useState([]);
   useEffect(() => {
+    if (!props.showTabBar) return;
     const routes = props.pages.toJS().map((route, index) => {
       const color =
         props.navigationState.index === index
@@ -53,13 +54,14 @@ function TabBar(props) {
       );
     });
     setRoutes(routes);
-  }, [props.navigationState.index, props.theme, props.pages]);
+  }, [props.navigationState.index, props.theme, props.pages, props.showTabBar]);
   return <View style={styles.tabs}>{routes}</View>;
 }
 const mapStateToProps = (state, ownProps) => {
   return {
     theme: state.theme,
     pages: state.pages.get('pages'),
+    showTabBar: state.pages.get('showTabBar'),
   };
 };
 const mapDispatchToProps = (dispatch, ownProps) => {
